@@ -72,10 +72,66 @@ include CMakeFiles/res.dir/flags.make
 CMakeFiles/res.dir/codegen:
 .PHONY : CMakeFiles/res.dir/codegen
 
+CMakeFiles/res.dir/src/baseActor.cpp.o: CMakeFiles/res.dir/flags.make
+CMakeFiles/res.dir/src/baseActor.cpp.o: /home/kanja/projects/GamesShowCase/armageddonClash/src/baseActor.cpp
+CMakeFiles/res.dir/src/baseActor.cpp.o: CMakeFiles/res.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kanja/projects/GamesShowCase/armageddonClash/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/res.dir/src/baseActor.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/res.dir/src/baseActor.cpp.o -MF CMakeFiles/res.dir/src/baseActor.cpp.o.d -o CMakeFiles/res.dir/src/baseActor.cpp.o -c /home/kanja/projects/GamesShowCase/armageddonClash/src/baseActor.cpp
+
+CMakeFiles/res.dir/src/baseActor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/res.dir/src/baseActor.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kanja/projects/GamesShowCase/armageddonClash/src/baseActor.cpp > CMakeFiles/res.dir/src/baseActor.cpp.i
+
+CMakeFiles/res.dir/src/baseActor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/res.dir/src/baseActor.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kanja/projects/GamesShowCase/armageddonClash/src/baseActor.cpp -o CMakeFiles/res.dir/src/baseActor.cpp.s
+
+CMakeFiles/res.dir/src/gameScene.cpp.o: CMakeFiles/res.dir/flags.make
+CMakeFiles/res.dir/src/gameScene.cpp.o: /home/kanja/projects/GamesShowCase/armageddonClash/src/gameScene.cpp
+CMakeFiles/res.dir/src/gameScene.cpp.o: CMakeFiles/res.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kanja/projects/GamesShowCase/armageddonClash/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/res.dir/src/gameScene.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/res.dir/src/gameScene.cpp.o -MF CMakeFiles/res.dir/src/gameScene.cpp.o.d -o CMakeFiles/res.dir/src/gameScene.cpp.o -c /home/kanja/projects/GamesShowCase/armageddonClash/src/gameScene.cpp
+
+CMakeFiles/res.dir/src/gameScene.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/res.dir/src/gameScene.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kanja/projects/GamesShowCase/armageddonClash/src/gameScene.cpp > CMakeFiles/res.dir/src/gameScene.cpp.i
+
+CMakeFiles/res.dir/src/gameScene.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/res.dir/src/gameScene.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kanja/projects/GamesShowCase/armageddonClash/src/gameScene.cpp -o CMakeFiles/res.dir/src/gameScene.cpp.s
+
+CMakeFiles/res.dir/src/hero.cpp.o: CMakeFiles/res.dir/flags.make
+CMakeFiles/res.dir/src/hero.cpp.o: /home/kanja/projects/GamesShowCase/armageddonClash/src/hero.cpp
+CMakeFiles/res.dir/src/hero.cpp.o: CMakeFiles/res.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kanja/projects/GamesShowCase/armageddonClash/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/res.dir/src/hero.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/res.dir/src/hero.cpp.o -MF CMakeFiles/res.dir/src/hero.cpp.o.d -o CMakeFiles/res.dir/src/hero.cpp.o -c /home/kanja/projects/GamesShowCase/armageddonClash/src/hero.cpp
+
+CMakeFiles/res.dir/src/hero.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/res.dir/src/hero.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kanja/projects/GamesShowCase/armageddonClash/src/hero.cpp > CMakeFiles/res.dir/src/hero.cpp.i
+
+CMakeFiles/res.dir/src/hero.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/res.dir/src/hero.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kanja/projects/GamesShowCase/armageddonClash/src/hero.cpp -o CMakeFiles/res.dir/src/hero.cpp.s
+
+CMakeFiles/res.dir/src/heroScene.cpp.o: CMakeFiles/res.dir/flags.make
+CMakeFiles/res.dir/src/heroScene.cpp.o: /home/kanja/projects/GamesShowCase/armageddonClash/src/heroScene.cpp
+CMakeFiles/res.dir/src/heroScene.cpp.o: CMakeFiles/res.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kanja/projects/GamesShowCase/armageddonClash/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/res.dir/src/heroScene.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/res.dir/src/heroScene.cpp.o -MF CMakeFiles/res.dir/src/heroScene.cpp.o.d -o CMakeFiles/res.dir/src/heroScene.cpp.o -c /home/kanja/projects/GamesShowCase/armageddonClash/src/heroScene.cpp
+
+CMakeFiles/res.dir/src/heroScene.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/res.dir/src/heroScene.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kanja/projects/GamesShowCase/armageddonClash/src/heroScene.cpp > CMakeFiles/res.dir/src/heroScene.cpp.i
+
+CMakeFiles/res.dir/src/heroScene.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/res.dir/src/heroScene.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kanja/projects/GamesShowCase/armageddonClash/src/heroScene.cpp -o CMakeFiles/res.dir/src/heroScene.cpp.s
+
 CMakeFiles/res.dir/src/main.cpp.o: CMakeFiles/res.dir/flags.make
 CMakeFiles/res.dir/src/main.cpp.o: /home/kanja/projects/GamesShowCase/armageddonClash/src/main.cpp
 CMakeFiles/res.dir/src/main.cpp.o: CMakeFiles/res.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kanja/projects/GamesShowCase/armageddonClash/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/res.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kanja/projects/GamesShowCase/armageddonClash/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/res.dir/src/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/res.dir/src/main.cpp.o -MF CMakeFiles/res.dir/src/main.cpp.o.d -o CMakeFiles/res.dir/src/main.cpp.o -c /home/kanja/projects/GamesShowCase/armageddonClash/src/main.cpp
 
 CMakeFiles/res.dir/src/main.cpp.i: cmake_force
@@ -86,14 +142,38 @@ CMakeFiles/res.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/res.dir/src/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kanja/projects/GamesShowCase/armageddonClash/src/main.cpp -o CMakeFiles/res.dir/src/main.cpp.s
 
+CMakeFiles/res.dir/src/mainMenuScene.cpp.o: CMakeFiles/res.dir/flags.make
+CMakeFiles/res.dir/src/mainMenuScene.cpp.o: /home/kanja/projects/GamesShowCase/armageddonClash/src/mainMenuScene.cpp
+CMakeFiles/res.dir/src/mainMenuScene.cpp.o: CMakeFiles/res.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kanja/projects/GamesShowCase/armageddonClash/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/res.dir/src/mainMenuScene.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/res.dir/src/mainMenuScene.cpp.o -MF CMakeFiles/res.dir/src/mainMenuScene.cpp.o.d -o CMakeFiles/res.dir/src/mainMenuScene.cpp.o -c /home/kanja/projects/GamesShowCase/armageddonClash/src/mainMenuScene.cpp
+
+CMakeFiles/res.dir/src/mainMenuScene.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/res.dir/src/mainMenuScene.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kanja/projects/GamesShowCase/armageddonClash/src/mainMenuScene.cpp > CMakeFiles/res.dir/src/mainMenuScene.cpp.i
+
+CMakeFiles/res.dir/src/mainMenuScene.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/res.dir/src/mainMenuScene.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kanja/projects/GamesShowCase/armageddonClash/src/mainMenuScene.cpp -o CMakeFiles/res.dir/src/mainMenuScene.cpp.s
+
 # Object files for target res
 res_OBJECTS = \
-"CMakeFiles/res.dir/src/main.cpp.o"
+"CMakeFiles/res.dir/src/baseActor.cpp.o" \
+"CMakeFiles/res.dir/src/gameScene.cpp.o" \
+"CMakeFiles/res.dir/src/hero.cpp.o" \
+"CMakeFiles/res.dir/src/heroScene.cpp.o" \
+"CMakeFiles/res.dir/src/main.cpp.o" \
+"CMakeFiles/res.dir/src/mainMenuScene.cpp.o"
 
 # External object files for target res
 res_EXTERNAL_OBJECTS =
 
+res: CMakeFiles/res.dir/src/baseActor.cpp.o
+res: CMakeFiles/res.dir/src/gameScene.cpp.o
+res: CMakeFiles/res.dir/src/hero.cpp.o
+res: CMakeFiles/res.dir/src/heroScene.cpp.o
 res: CMakeFiles/res.dir/src/main.cpp.o
+res: CMakeFiles/res.dir/src/mainMenuScene.cpp.o
 res: CMakeFiles/res.dir/build.make
 res: CMakeFiles/res.dir/compiler_depend.ts
 res: _deps/raylib-build/raylib/libraylib.a
@@ -103,7 +183,7 @@ res: _deps/raylib-build/raylib/external/glfw/src/libglfw3.a
 res: /usr/lib/x86_64-linux-gnu/librt.a
 res: /usr/lib/x86_64-linux-gnu/libm.so
 res: CMakeFiles/res.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kanja/projects/GamesShowCase/armageddonClash/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable res"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kanja/projects/GamesShowCase/armageddonClash/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable res"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/res.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

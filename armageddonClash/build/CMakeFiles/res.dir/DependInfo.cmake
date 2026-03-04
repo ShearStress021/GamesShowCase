@@ -8,7 +8,12 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/kanja/projects/GamesShowCase/armageddonClash/src/baseActor.cpp" "CMakeFiles/res.dir/src/baseActor.cpp.o" "gcc" "CMakeFiles/res.dir/src/baseActor.cpp.o.d"
+  "/home/kanja/projects/GamesShowCase/armageddonClash/src/gameScene.cpp" "CMakeFiles/res.dir/src/gameScene.cpp.o" "gcc" "CMakeFiles/res.dir/src/gameScene.cpp.o.d"
+  "/home/kanja/projects/GamesShowCase/armageddonClash/src/hero.cpp" "CMakeFiles/res.dir/src/hero.cpp.o" "gcc" "CMakeFiles/res.dir/src/hero.cpp.o.d"
+  "/home/kanja/projects/GamesShowCase/armageddonClash/src/heroScene.cpp" "CMakeFiles/res.dir/src/heroScene.cpp.o" "gcc" "CMakeFiles/res.dir/src/heroScene.cpp.o.d"
   "/home/kanja/projects/GamesShowCase/armageddonClash/src/main.cpp" "CMakeFiles/res.dir/src/main.cpp.o" "gcc" "CMakeFiles/res.dir/src/main.cpp.o.d"
+  "/home/kanja/projects/GamesShowCase/armageddonClash/src/mainMenuScene.cpp" "CMakeFiles/res.dir/src/mainMenuScene.cpp.o" "gcc" "CMakeFiles/res.dir/src/mainMenuScene.cpp.o.d"
   "" "res" "gcc" "CMakeFiles/res.dir/link.d"
   )
 

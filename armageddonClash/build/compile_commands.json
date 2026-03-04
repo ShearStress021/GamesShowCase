@@ -1,9 +1,39 @@
 [
 {
   "directory": "/home/kanja/projects/GamesShowCase/armageddonClash/build",
+  "command": "/usr/bin/c++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -I/home/kanja/projects/GamesShowCase/armageddonClash/build/_deps/raylib-src/src -I/home/kanja/projects/GamesShowCase/armageddonClash/build/_deps/raylib-src/src/external/glfw/include -I/home/kanja/projects/GamesShowCase/armageddonClash/build/_deps/raygui-src/src  -o CMakeFiles/res.dir/src/baseActor.cpp.o -c /home/kanja/projects/GamesShowCase/armageddonClash/src/baseActor.cpp",
+  "file": "/home/kanja/projects/GamesShowCase/armageddonClash/src/baseActor.cpp",
+  "output": "CMakeFiles/res.dir/src/baseActor.cpp.o"
+},
+{
+  "directory": "/home/kanja/projects/GamesShowCase/armageddonClash/build",
+  "command": "/usr/bin/c++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -I/home/kanja/projects/GamesShowCase/armageddonClash/build/_deps/raylib-src/src -I/home/kanja/projects/GamesShowCase/armageddonClash/build/_deps/raylib-src/src/external/glfw/include -I/home/kanja/projects/GamesShowCase/armageddonClash/build/_deps/raygui-src/src  -o CMakeFiles/res.dir/src/gameScene.cpp.o -c /home/kanja/projects/GamesShowCase/armageddonClash/src/gameScene.cpp",
+  "file": "/home/kanja/projects/GamesShowCase/armageddonClash/src/gameScene.cpp",
+  "output": "CMakeFiles/res.dir/src/gameScene.cpp.o"
+},
+{
+  "directory": "/home/kanja/projects/GamesShowCase/armageddonClash/build",
+  "command": "/usr/bin/c++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -I/home/kanja/projects/GamesShowCase/armageddonClash/build/_deps/raylib-src/src -I/home/kanja/projects/GamesShowCase/armageddonClash/build/_deps/raylib-src/src/external/glfw/include -I/home/kanja/projects/GamesShowCase/armageddonClash/build/_deps/raygui-src/src  -o CMakeFiles/res.dir/src/hero.cpp.o -c /home/kanja/projects/GamesShowCase/armageddonClash/src/hero.cpp",
+  "file": "/home/kanja/projects/GamesShowCase/armageddonClash/src/hero.cpp",
+  "output": "CMakeFiles/res.dir/src/hero.cpp.o"
+},
+{
+  "directory": "/home/kanja/projects/GamesShowCase/armageddonClash/build",
+  "command": "/usr/bin/c++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -I/home/kanja/projects/GamesShowCase/armageddonClash/build/_deps/raylib-src/src -I/home/kanja/projects/GamesShowCase/armageddonClash/build/_deps/raylib-src/src/external/glfw/include -I/home/kanja/projects/GamesShowCase/armageddonClash/build/_deps/raygui-src/src  -o CMakeFiles/res.dir/src/heroScene.cpp.o -c /home/kanja/projects/GamesShowCase/armageddonClash/src/heroScene.cpp",
+  "file": "/home/kanja/projects/GamesShowCase/armageddonClash/src/heroScene.cpp",
+  "output": "CMakeFiles/res.dir/src/heroScene.cpp.o"
+},
+{
+  "directory": "/home/kanja/projects/GamesShowCase/armageddonClash/build",
   "command": "/usr/bin/c++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -I/home/kanja/projects/GamesShowCase/armageddonClash/build/_deps/raylib-src/src -I/home/kanja/projects/GamesShowCase/armageddonClash/build/_deps/raylib-src/src/external/glfw/include -I/home/kanja/projects/GamesShowCase/armageddonClash/build/_deps/raygui-src/src  -o CMakeFiles/res.dir/src/main.cpp.o -c /home/kanja/projects/GamesShowCase/armageddonClash/src/main.cpp",
   "file": "/home/kanja/projects/GamesShowCase/armageddonClash/src/main.cpp",
   "output": "CMakeFiles/res.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/kanja/projects/GamesShowCase/armageddonClash/build",
+  "command": "/usr/bin/c++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -I/home/kanja/projects/GamesShowCase/armageddonClash/build/_deps/raylib-src/src -I/home/kanja/projects/GamesShowCase/armageddonClash/build/_deps/raylib-src/src/external/glfw/include -I/home/kanja/projects/GamesShowCase/armageddonClash/build/_deps/raygui-src/src  -o CMakeFiles/res.dir/src/mainMenuScene.cpp.o -c /home/kanja/projects/GamesShowCase/armageddonClash/src/mainMenuScene.cpp",
+  "file": "/home/kanja/projects/GamesShowCase/armageddonClash/src/mainMenuScene.cpp",
+  "output": "CMakeFiles/res.dir/src/mainMenuScene.cpp.o"
 },
 {
   "directory": "/home/kanja/projects/GamesShowCase/armageddonClash/build/_deps/raylib-build/raylib",

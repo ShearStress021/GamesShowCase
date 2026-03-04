@@ -220,6 +220,102 @@ glfw/fast:
 	$(MAKE) $(MAKESILENT) -f _deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/build.make _deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/build
 .PHONY : glfw/fast
 
+src/baseActor.o: src/baseActor.cpp.o
+.PHONY : src/baseActor.o
+
+# target to build an object file
+src/baseActor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/baseActor.cpp.o
+.PHONY : src/baseActor.cpp.o
+
+src/baseActor.i: src/baseActor.cpp.i
+.PHONY : src/baseActor.i
+
+# target to preprocess a source file
+src/baseActor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/baseActor.cpp.i
+.PHONY : src/baseActor.cpp.i
+
+src/baseActor.s: src/baseActor.cpp.s
+.PHONY : src/baseActor.s
+
+# target to generate assembly for a file
+src/baseActor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/baseActor.cpp.s
+.PHONY : src/baseActor.cpp.s
+
+src/gameScene.o: src/gameScene.cpp.o
+.PHONY : src/gameScene.o
+
+# target to build an object file
+src/gameScene.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/gameScene.cpp.o
+.PHONY : src/gameScene.cpp.o
+
+src/gameScene.i: src/gameScene.cpp.i
+.PHONY : src/gameScene.i
+
+# target to preprocess a source file
+src/gameScene.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/gameScene.cpp.i
+.PHONY : src/gameScene.cpp.i
+
+src/gameScene.s: src/gameScene.cpp.s
+.PHONY : src/gameScene.s
+
+# target to generate assembly for a file
+src/gameScene.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/gameScene.cpp.s
+.PHONY : src/gameScene.cpp.s
+
+src/hero.o: src/hero.cpp.o
+.PHONY : src/hero.o
+
+# target to build an object file
+src/hero.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/hero.cpp.o
+.PHONY : src/hero.cpp.o
+
+src/hero.i: src/hero.cpp.i
+.PHONY : src/hero.i
+
+# target to preprocess a source file
+src/hero.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/hero.cpp.i
+.PHONY : src/hero.cpp.i
+
+src/hero.s: src/hero.cpp.s
+.PHONY : src/hero.s
+
+# target to generate assembly for a file
+src/hero.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/hero.cpp.s
+.PHONY : src/hero.cpp.s
+
+src/heroScene.o: src/heroScene.cpp.o
+.PHONY : src/heroScene.o
+
+# target to build an object file
+src/heroScene.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/heroScene.cpp.o
+.PHONY : src/heroScene.cpp.o
+
+src/heroScene.i: src/heroScene.cpp.i
+.PHONY : src/heroScene.i
+
+# target to preprocess a source file
+src/heroScene.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/heroScene.cpp.i
+.PHONY : src/heroScene.cpp.i
+
+src/heroScene.s: src/heroScene.cpp.s
+.PHONY : src/heroScene.s
+
+# target to generate assembly for a file
+src/heroScene.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/heroScene.cpp.s
+.PHONY : src/heroScene.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -244,6 +340,30 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/mainMenuScene.o: src/mainMenuScene.cpp.o
+.PHONY : src/mainMenuScene.o
+
+# target to build an object file
+src/mainMenuScene.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/mainMenuScene.cpp.o
+.PHONY : src/mainMenuScene.cpp.o
+
+src/mainMenuScene.i: src/mainMenuScene.cpp.i
+.PHONY : src/mainMenuScene.i
+
+# target to preprocess a source file
+src/mainMenuScene.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/mainMenuScene.cpp.i
+.PHONY : src/mainMenuScene.cpp.i
+
+src/mainMenuScene.s: src/mainMenuScene.cpp.s
+.PHONY : src/mainMenuScene.s
+
+# target to generate assembly for a file
+src/mainMenuScene.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/mainMenuScene.cpp.s
+.PHONY : src/mainMenuScene.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -261,9 +381,24 @@ help:
 	@echo "... glfw"
 	@echo "... raylib"
 	@echo "... res"
+	@echo "... src/baseActor.o"
+	@echo "... src/baseActor.i"
+	@echo "... src/baseActor.s"
+	@echo "... src/gameScene.o"
+	@echo "... src/gameScene.i"
+	@echo "... src/gameScene.s"
+	@echo "... src/hero.o"
+	@echo "... src/hero.i"
+	@echo "... src/hero.s"
+	@echo "... src/heroScene.o"
+	@echo "... src/heroScene.i"
+	@echo "... src/heroScene.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/mainMenuScene.o"
+	@echo "... src/mainMenuScene.i"
+	@echo "... src/mainMenuScene.s"
 .PHONY : help
 
 

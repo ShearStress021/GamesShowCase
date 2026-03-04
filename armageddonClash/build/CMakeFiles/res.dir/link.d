@@ -2,7 +2,12 @@ res: \
   /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/Scrt1.o \
   /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crti.o \
   /usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o \
+  CMakeFiles/res.dir/src/baseActor.cpp.o \
+  CMakeFiles/res.dir/src/gameScene.cpp.o \
+  CMakeFiles/res.dir/src/hero.cpp.o \
+  CMakeFiles/res.dir/src/heroScene.cpp.o \
   CMakeFiles/res.dir/src/main.cpp.o \
+  CMakeFiles/res.dir/src/mainMenuScene.cpp.o \
   _deps/raylib-build/raylib/libraylib.a \
   /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/libpthread.a \
   /usr/lib/x86_64-linux-gnu/libGL.so \
@@ -49,7 +54,17 @@ res: \
 
 /usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o:
 
+CMakeFiles/res.dir/src/baseActor.cpp.o:
+
+CMakeFiles/res.dir/src/gameScene.cpp.o:
+
+CMakeFiles/res.dir/src/hero.cpp.o:
+
+CMakeFiles/res.dir/src/heroScene.cpp.o:
+
 CMakeFiles/res.dir/src/main.cpp.o:
+
+CMakeFiles/res.dir/src/mainMenuScene.cpp.o:
 
 _deps/raylib-build/raylib/libraylib.a:
 

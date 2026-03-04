@@ -1,20 +1,36 @@
 #include "raylib.h"
+#include "raylib.hpp"
+
+#include "mainMenuScene.hpp"
 #define RAYGUI_IMPLEMENTATION
 #include "raygui.h"
+#include <memory>
+#define WIDTH 920
+#define HEIGHT 720 
 
 int main(void)
 {
-    InitWindow(800, 450, "raylib [core] example - basic window");
+
+
+    InitWindow(WIDTH,HEIGHT, "raylib [core] example - basic window");
+
+    std::shared_ptr<game::GameScene> currscene = std::make_shared<game::MainMenuScene>();
 
     while (!WindowShouldClose())
     {
         BeginDrawing();
             ClearBackground(RAYWHITE);
-            DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
+
+            currscene->draw();
+
+
         EndDrawing();
     }
+
 
     CloseWindow();
 
     return 0;
+
 }
+

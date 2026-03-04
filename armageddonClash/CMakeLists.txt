@@ -38,5 +38,3 @@ add_executable(res ${SOURCES})
 
 target_link_libraries(res raylib)
 target_link_libraries(res raygui)
-
-

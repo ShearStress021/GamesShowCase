@@ -168,12 +168,12 @@ CMakeFiles/res.dir/all: _deps/raylib-build/raylib/CMakeFiles/raylib.dir/all
 CMakeFiles/res.dir/all: _deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/kanja/projects/GamesShowCase/armageddonClash/build/CMakeFiles --progress-num=26,27 "Built target res"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/kanja/projects/GamesShowCase/armageddonClash/build/CMakeFiles --progress-num=26,27,28,29,30,31,32 "Built target res"
 .PHONY : CMakeFiles/res.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/res.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kanja/projects/GamesShowCase/armageddonClash/build/CMakeFiles 27
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kanja/projects/GamesShowCase/armageddonClash/build/CMakeFiles 32
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/res.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/kanja/projects/GamesShowCase/armageddonClash/build/CMakeFiles 0
 .PHONY : CMakeFiles/res.dir/rule
@@ -185,7 +185,7 @@ res: CMakeFiles/res.dir/rule
 # codegen rule for target.
 CMakeFiles/res.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/kanja/projects/GamesShowCase/armageddonClash/build/CMakeFiles --progress-num=26,27 "Finished codegen for target res"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/kanja/projects/GamesShowCase/armageddonClash/build/CMakeFiles --progress-num=26,27,28,29,30,31,32 "Finished codegen for target res"
 .PHONY : CMakeFiles/res.dir/codegen
 
 # clean rule for target.
