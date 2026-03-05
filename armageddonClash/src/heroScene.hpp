@@ -2,7 +2,8 @@
 
 #include "gameScene.hpp"
 #include "hero.hpp"
-#include <memory>
+#include <iostream>
+
 
 
 
@@ -15,6 +16,6 @@ namespace game
 
             virtual ~HeroScene();
 
-            virtual void loadGameResources();
+            virtual void loadGameResources() ;
     };
 }

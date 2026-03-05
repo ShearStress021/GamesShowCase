@@ -1,6 +1,7 @@
 #pragma once
 #include <list>
 #include <memory>
+#include <iostream>
 
 
 namespace game {
@@ -19,8 +20,14 @@ namespace game {
 
 			virtual void draw();
 
+			virtual void start();
+
+			virtual std::shared_ptr<GameScene> update();
+
 		protected:
 			std::list< std::shared_ptr<BaseActor>> actors{};
+
+			bool exit{};
 
 			int groundYPos{};
 

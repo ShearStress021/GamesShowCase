@@ -13,5 +13,10 @@ namespace game
 			MainMenuScene();
 			virtual ~MainMenuScene();
 			virtual void draw();
+
+			virtual void loadGameResources();
+			virtual std::shared_ptr<GameScene> update();
+		private:
+			bool startClicked{};
 	};
 }

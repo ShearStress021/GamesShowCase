@@ -4,7 +4,7 @@
 #include "raylib.hpp"
 #include "rectangle.hpp"
 #include "raymath.hpp"
-
+#include <iostream>
 
 
 
@@ -15,7 +15,7 @@ namespace game {
 		public:
 			Hero();
 
-			virtual bool update(bool onGround);
+			virtual void update();
 			virtual void draw();
 			virtual Rectangle getBoundingBox();
 
@@ -31,6 +31,7 @@ namespace game {
 			float frameDelayCounter{};
 			unsigned frameIndex{};
 			Rectangle frameRect{};
+			bool isOnGround{};
 
 
 

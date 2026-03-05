@@ -9,9 +9,9 @@ namespace game
     BaseActor::~BaseActor(){}
 
 
-    bool BaseActor::update(bool onGround)
+    void BaseActor::update()
     {
-        return true;
+        //return true;
     }
 
 

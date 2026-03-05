@@ -1,9 +1,9 @@
 CMakeFiles/res.dir/src/main.cpp.o: \
  /home/kanja/projects/GamesShowCase/armageddonClash/src/main.cpp \
  /usr/include/stdc-predef.h \
+ /home/kanja/projects/GamesShowCase/armageddonClash/src/raylib.hpp \
  /home/kanja/projects/GamesShowCase/armageddonClash/build/_deps/raylib-src/src/raylib.h \
  /usr/lib/gcc/x86_64-linux-gnu/14/include/stdarg.h \
- /home/kanja/projects/GamesShowCase/armageddonClash/src/raylib.hpp \
  /home/kanja/projects/GamesShowCase/armageddonClash/src/mainMenuScene.hpp \
  /home/kanja/projects/GamesShowCase/armageddonClash/src/gameScene.hpp \
  /usr/include/c++/14/list /usr/include/c++/14/bits/requires_hosted.h \
@@ -130,14 +130,20 @@ CMakeFiles/res.dir/src/main.cpp.o: \
  /usr/include/c++/14/bits/atomic_lockfree_defines.h \
  /usr/include/c++/14/backward/auto_ptr.h \
  /usr/include/c++/14/pstl/glue_memory_defs.h \
- /usr/include/c++/14/pstl/execution_defs.h \
- /home/kanja/projects/GamesShowCase/armageddonClash/build/_deps/raygui-src/src/raygui.h \
- /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /usr/include/c++/14/stdlib.h /usr/include/c++/14/cstdlib \
+ /usr/include/c++/14/pstl/execution_defs.h /usr/include/c++/14/iostream \
+ /usr/include/c++/14/ostream /usr/include/c++/14/ios \
+ /usr/include/c++/14/bits/char_traits.h \
+ /usr/include/c++/14/bits/localefwd.h \
+ /usr/include/x86_64-linux-gnu/c++/14/bits/c++locale.h \
+ /usr/include/c++/14/clocale /usr/include/locale.h \
+ /usr/include/x86_64-linux-gnu/bits/locale.h /usr/include/c++/14/cctype \
+ /usr/include/ctype.h /usr/include/c++/14/bits/ios_base.h \
+ /usr/include/c++/14/bits/locale_classes.h /usr/include/c++/14/string \
+ /usr/include/c++/14/bits/ostream_insert.h \
+ /usr/include/c++/14/bits/cxxabi_forced.h \
+ /usr/include/c++/14/bits/basic_string.h /usr/include/c++/14/string_view \
+ /usr/include/c++/14/bits/string_view.tcc \
+ /usr/include/c++/14/ext/string_conversions.h /usr/include/c++/14/cstdlib \
  /usr/include/stdlib.h /usr/include/x86_64-linux-gnu/bits/waitflags.h \
  /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
  /usr/include/x86_64-linux-gnu/sys/types.h /usr/include/endian.h \
@@ -147,9 +153,41 @@ CMakeFiles/res.dir/src/main.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/select.h \
  /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
  /usr/include/alloca.h /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/c++/14/bits/std_abs.h /usr/include/string.h \
- /usr/include/strings.h /usr/include/c++/14/math.h \
- /usr/include/c++/14/cmath /usr/include/math.h \
+ /usr/include/c++/14/bits/std_abs.h /usr/include/c++/14/cstdio \
+ /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
+ /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
+ /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
+ /usr/include/c++/14/cerrno /usr/include/errno.h \
+ /usr/include/x86_64-linux-gnu/bits/errno.h /usr/include/linux/errno.h \
+ /usr/lib/linux/uapi/x86/asm/errno.h /usr/include/asm-generic/errno.h \
+ /usr/include/asm-generic/errno-base.h \
+ /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
+ /usr/include/c++/14/bits/charconv.h \
+ /usr/include/c++/14/bits/basic_string.tcc \
+ /usr/include/c++/14/bits/locale_classes.tcc \
+ /usr/include/c++/14/system_error \
+ /usr/include/x86_64-linux-gnu/c++/14/bits/error_constants.h \
+ /usr/include/c++/14/stdexcept /usr/include/c++/14/streambuf \
+ /usr/include/c++/14/bits/streambuf.tcc \
+ /usr/include/c++/14/bits/basic_ios.h \
+ /usr/include/c++/14/bits/locale_facets.h /usr/include/c++/14/cwctype \
+ /usr/include/wctype.h /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h \
+ /usr/include/x86_64-linux-gnu/c++/14/bits/ctype_base.h \
+ /usr/include/c++/14/bits/streambuf_iterator.h \
+ /usr/include/x86_64-linux-gnu/c++/14/bits/ctype_inline.h \
+ /usr/include/c++/14/bits/locale_facets.tcc \
+ /usr/include/c++/14/bits/basic_ios.tcc \
+ /usr/include/c++/14/bits/ostream.tcc /usr/include/c++/14/istream \
+ /usr/include/c++/14/bits/istream.tcc \
+ /home/kanja/projects/GamesShowCase/armageddonClash/src/heroScene.hpp \
+ /home/kanja/projects/GamesShowCase/armageddonClash/src/hero.hpp \
+ /home/kanja/projects/GamesShowCase/armageddonClash/src/baseActor.hpp \
+ /home/kanja/projects/GamesShowCase/armageddonClash/src/rectangle.hpp \
+ /home/kanja/projects/GamesShowCase/armageddonClash/src/raymath.hpp \
+ /home/kanja/projects/GamesShowCase/armageddonClash/build/_deps/raylib-src/src/raymath.h \
+ /usr/include/c++/14/math.h /usr/include/c++/14/cmath /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
@@ -172,4 +210,7 @@ CMakeFiles/res.dir/src/main.cpp.o: \
  /usr/include/c++/14/tr1/modified_bessel_func.tcc \
  /usr/include/c++/14/tr1/poly_hermite.tcc \
  /usr/include/c++/14/tr1/poly_laguerre.tcc \
- /usr/include/c++/14/tr1/riemann_zeta.tcc
+ /usr/include/c++/14/tr1/riemann_zeta.tcc \
+ /home/kanja/projects/GamesShowCase/armageddonClash/build/_deps/raygui-src/src/raygui.h \
+ /usr/include/c++/14/stdlib.h /usr/include/string.h \
+ /usr/include/strings.h

@@ -1,10 +1,9 @@
-#include "raylib.h"
 #include "raylib.hpp"
-
 #include "mainMenuScene.hpp"
+
+#include "heroScene.hpp"
 #define RAYGUI_IMPLEMENTATION
 #include "raygui.h"
-#include <memory>
 #define WIDTH 920
 #define HEIGHT 720 
 
@@ -16,10 +15,22 @@ int main(void)
 
     std::shared_ptr<game::GameScene> currscene = std::make_shared<game::MainMenuScene>();
 
+    currscene->loadGameResources();
+
+    currscene->start();
+
+
     while (!WindowShouldClose())
     {
+        auto nextScene = currscene->update();
+
+        if (nextScene)
+        {
+            nextScene->loadGameResources();
+            currscene = nextScene;
+        }
         BeginDrawing();
-            ClearBackground(RAYWHITE);
+           // ClearBackground(BLUE);
 
             currscene->draw();
 

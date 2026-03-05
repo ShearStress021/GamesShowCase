@@ -11,7 +11,7 @@ namespace game {
             BaseActor();
             virtual ~BaseActor();
 
-            virtual bool update(bool onGround);
+            virtual void update();
 
             virtual void draw();
 
