@@ -1,0 +1,3 @@
+/home/kanja/projects/GamesShowCase/DonDominion/build/CMakeFiles/res.dir
+/home/kanja/projects/GamesShowCase/DonDominion/build/CMakeFiles/edit_cache.dir
+/home/kanja/projects/GamesShowCase/DonDominion/build/CMakeFiles/rebuild_cache.dir

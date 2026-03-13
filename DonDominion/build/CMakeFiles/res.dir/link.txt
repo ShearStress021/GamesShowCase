@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/res.dir/link.d CMakeFiles/res.dir/src/game.cpp.o CMakeFiles/res.dir/src/gameScene.cpp.o CMakeFiles/res.dir/src/main.cpp.o CMakeFiles/res.dir/src/menuScene.cpp.o CMakeFiles/res.dir/src/resource.cpp.o -o res  -Wl,-rpath,/usr/local/lib /usr/local/lib/libraylib.so.5.5.0 -lm

@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/kanja/projects/GamesShowCase/DonDominion/build",
+  "command": "/usr/bin/c++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -DUSE_LIBTYPE_SHARED  -std=gnu++17 -o CMakeFiles/res.dir/src/game.cpp.o -c /home/kanja/projects/GamesShowCase/DonDominion/src/game.cpp",
+  "file": "/home/kanja/projects/GamesShowCase/DonDominion/src/game.cpp",
+  "output": "CMakeFiles/res.dir/src/game.cpp.o"
+},
+{
+  "directory": "/home/kanja/projects/GamesShowCase/DonDominion/build",
+  "command": "/usr/bin/c++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -DUSE_LIBTYPE_SHARED  -std=gnu++17 -o CMakeFiles/res.dir/src/gameScene.cpp.o -c /home/kanja/projects/GamesShowCase/DonDominion/src/gameScene.cpp",
+  "file": "/home/kanja/projects/GamesShowCase/DonDominion/src/gameScene.cpp",
+  "output": "CMakeFiles/res.dir/src/gameScene.cpp.o"
+},
+{
+  "directory": "/home/kanja/projects/GamesShowCase/DonDominion/build",
+  "command": "/usr/bin/c++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -DUSE_LIBTYPE_SHARED  -std=gnu++17 -o CMakeFiles/res.dir/src/main.cpp.o -c /home/kanja/projects/GamesShowCase/DonDominion/src/main.cpp",
+  "file": "/home/kanja/projects/GamesShowCase/DonDominion/src/main.cpp",
+  "output": "CMakeFiles/res.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/kanja/projects/GamesShowCase/DonDominion/build",
+  "command": "/usr/bin/c++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -DUSE_LIBTYPE_SHARED  -std=gnu++17 -o CMakeFiles/res.dir/src/menuScene.cpp.o -c /home/kanja/projects/GamesShowCase/DonDominion/src/menuScene.cpp",
+  "file": "/home/kanja/projects/GamesShowCase/DonDominion/src/menuScene.cpp",
+  "output": "CMakeFiles/res.dir/src/menuScene.cpp.o"
+},
+{
+  "directory": "/home/kanja/projects/GamesShowCase/DonDominion/build",
+  "command": "/usr/bin/c++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -DUSE_LIBTYPE_SHARED  -std=gnu++17 -o CMakeFiles/res.dir/src/resource.cpp.o -c /home/kanja/projects/GamesShowCase/DonDominion/src/resource.cpp",
+  "file": "/home/kanja/projects/GamesShowCase/DonDominion/src/resource.cpp",
+  "output": "CMakeFiles/res.dir/src/resource.cpp.o"
+}
+]
