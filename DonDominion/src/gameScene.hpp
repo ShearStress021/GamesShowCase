@@ -14,7 +14,7 @@ namespace dominion {
 		float alpha{1.f};
 		float rotation{};
 		public:
-			GameScene() = default;
+			GameScene();
 			~GameScene() = default;
 			void render() override;
 
