@@ -12,7 +12,7 @@ Each game lives in its own directory and can be built and run independently.
 | Game | Library | Status | Description |
 |-----|--------|--------|-------------|
 | `armageddonClash` | raylib | 🧪 Prototype | Short description |
-| `game-name-2` | SDL3 | 🚧 In Progress | Short description |
+| `don Dominion` | raylib | 🚧 In Progress | Short description |
 | `game-name-3` | raylib | 🧪 Prototype | Short description |
 
 > This list will grow as more games are added.
