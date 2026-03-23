@@ -1,68 +1,60 @@
 #include "resource.hpp"
+#include <filesystem> 
+
 
 
 namespace dominion {
 
-	Texture& ResourceManager::loadTexture(const std::string& name, const std::filesystem::path& path)
+	Texture2D& loadTexture(const std::string &name, const std::string &path)
 	{
-		if(textureExists(name))
-		{
-			return textures[name];
-		
-		}
+	  if (textures.count(name)) {
+			 return textures[name];
+	  }
 
-		Texture texture = LoadTexture(path.c_str());
+	  Texture texture = LoadTexture(path.c_str());
+	  if (texture.id == 0) {
+		 
+		   return getFallbackTexture();
+	  }
+	  textures.insert({name, texture});
+	  return textures[name];
 
-		if(texture.id == 0)
-		{
-			return getFallbackTexture();
-		}
+	}
+	Texture& getTexture(const std::string &name)
+	{
+	  if (!textures.count(name)) {
+///			
+	 		return getFallbackTexture();
+	  }
+	  return textures[name];
 
-		textures.insert({name, texture});
-		return textures[name];
+	}
+	
+	void loadTextures()
+	{
+	  std::filesystem::create_directories("data/sprites/");
+	  for (const auto &file: std::filesystem::recursive_directory_iterator("data/sprites/")) {
+		if (file.is_regular_file()) {
+				 loadTexture(file.path().stem().string(), file.path().string());
+		  }
+	  }
 
 	}
 
-	void ResourceManager::loadTextures()
-	{
-		for(const auto& file: std::filesystem::recursive_directory_iterator("data/sprites"))
-		{
-			loadTexture(file.path().stem().string(), file.path());
-
-		}
-
-	}
-
-	Texture& ResourceManager::getTexture(const std::string& name)
-	{
-		if(!textureExists(name))
-		{
-			return getFallbackTexture();
-		}
-		return textures[name];
-	}
-
-	bool ResourceManager::textureExists(const std::string& name)
-	{
-		return textures.count(name);
-	}
-
-
-	Texture& ResourceManager::getFallbackTexture()
+	Texture& getFallbackTexture()
 	{
 		static Texture fallbackTexture;
 		static bool loaded = false;
-		if(!loaded)
-		{
-			Image image = GenImageChecked(32, 32, 4, 4, MAROON, BLACK);
-			fallbackTexture = LoadTextureFromImage(image);
-			UnloadImage(image);
-			loaded = true;
+
+		if (!loaded) {
+			  Image image = GenImageChecked(8, 8, 2, 2, MAGENTA, BLACK);
+			  fallbackTexture = LoadTextureFromImage(image);
+			  UnloadImage(image);
+			  loaded = true;
 		}
 		return fallbackTexture;
+
 	}
-
-
-
-
 }
+
+

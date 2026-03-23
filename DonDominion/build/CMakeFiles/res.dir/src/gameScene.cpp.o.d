@@ -132,6 +132,7 @@ CMakeFiles/res.dir/src/gameScene.cpp.o: \
  /usr/include/c++/14/bits/memory_resource.h /usr/include/c++/14/cstddef \
  /usr/include/c++/14/bits/uses_allocator_args.h \
  /home/kanja/projects/GamesShowCase/DonDominion/src/menuScene.hpp \
+ /home/kanja/projects/GamesShowCase/DonDominion/src/hero.hpp \
  /usr/local/include/raylib.h \
  /home/kanja/projects/GamesShowCase/DonDominion/src/resource.hpp \
  /usr/include/c++/14/string /usr/include/c++/14/bits/char_traits.h \
@@ -172,37 +173,23 @@ CMakeFiles/res.dir/src/gameScene.cpp.o: \
  /usr/include/c++/14/bits/hashtable_policy.h \
  /usr/include/c++/14/bits/enable_special_members.h \
  /usr/include/c++/14/bits/node_handle.h \
- /usr/include/c++/14/bits/erase_if.h /usr/include/c++/14/filesystem \
- /usr/include/c++/14/bits/fs_fwd.h /usr/include/c++/14/system_error \
- /usr/include/x86_64-linux-gnu/c++/14/bits/error_constants.h \
- /usr/include/c++/14/stdexcept /usr/include/c++/14/cstdint \
- /usr/include/c++/14/bits/chrono.h /usr/include/c++/14/ratio \
- /usr/include/c++/14/limits /usr/include/c++/14/ctime \
- /usr/include/c++/14/bits/parse_numbers.h \
- /usr/include/c++/14/bits/fs_path.h /usr/include/c++/14/locale \
+ /usr/include/c++/14/bits/erase_if.h /usr/include/c++/14/csetjmp \
+ /usr/include/setjmp.h /usr/include/c++/14/iostream \
+ /usr/include/c++/14/ostream /usr/include/c++/14/ios \
+ /usr/include/c++/14/bits/ios_base.h \
  /usr/include/c++/14/bits/locale_classes.h \
  /usr/include/c++/14/bits/locale_classes.tcc \
+ /usr/include/c++/14/system_error \
+ /usr/include/x86_64-linux-gnu/c++/14/bits/error_constants.h \
+ /usr/include/c++/14/stdexcept /usr/include/c++/14/streambuf \
+ /usr/include/c++/14/bits/streambuf.tcc \
+ /usr/include/c++/14/bits/basic_ios.h \
  /usr/include/c++/14/bits/locale_facets.h /usr/include/c++/14/cwctype \
  /usr/include/wctype.h /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h \
  /usr/include/x86_64-linux-gnu/c++/14/bits/ctype_base.h \
- /usr/include/c++/14/bits/ios_base.h /usr/include/c++/14/streambuf \
- /usr/include/c++/14/bits/streambuf.tcc \
  /usr/include/c++/14/bits/streambuf_iterator.h \
  /usr/include/x86_64-linux-gnu/c++/14/bits/ctype_inline.h \
  /usr/include/c++/14/bits/locale_facets.tcc \
- /usr/include/c++/14/bits/locale_facets_nonio.h \
- /usr/include/x86_64-linux-gnu/c++/14/bits/time_members.h \
- /usr/include/x86_64-linux-gnu/c++/14/bits/messages_members.h \
- /usr/include/libintl.h /usr/include/c++/14/bits/codecvt.h \
- /usr/include/c++/14/bits/locale_facets_nonio.tcc \
- /usr/include/c++/14/bits/locale_conv.h /usr/include/c++/14/iomanip \
- /usr/include/c++/14/bits/quoted_string.h /usr/include/c++/14/sstream \
- /usr/include/c++/14/istream /usr/include/c++/14/ios \
- /usr/include/c++/14/bits/basic_ios.h \
- /usr/include/c++/14/bits/basic_ios.tcc /usr/include/c++/14/ostream \
- /usr/include/c++/14/bits/ostream.tcc \
- /usr/include/c++/14/bits/istream.tcc \
- /usr/include/c++/14/bits/sstream.tcc /usr/include/c++/14/codecvt \
- /usr/include/c++/14/bits/fs_dir.h /usr/include/c++/14/bits/fs_ops.h \
- /usr/include/c++/14/csetjmp /usr/include/setjmp.h \
- /usr/include/c++/14/iostream
+ /usr/include/c++/14/bits/basic_ios.tcc \
+ /usr/include/c++/14/bits/ostream.tcc /usr/include/c++/14/istream \
+ /usr/include/c++/14/bits/istream.tcc

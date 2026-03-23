@@ -17,7 +17,9 @@ namespace dominion
 
 	GameScene::GameScene()
 	{
-		ResourceManager::get().loadTexture("loading", "data/sprites/loading.png");
+		loadTexture("loading", "data/sprites/loading.png");
+
+		loadTexture("hero", "data/sprites/gang/Idle.png");
 
 	}
 
@@ -77,7 +79,7 @@ namespace dominion
 
 	void GameScene::updateLoading()
 	{
-		ResourceManager::get().loadTextures();
+		loadTextures();
 		phase = Phase::FADEOUT;
 	}
 
@@ -85,7 +87,7 @@ namespace dominion
 	{
 		BeginDrawing();
 			ClearBackground(BLACK);
-			  auto& tex = ResourceManager::get().getTexture("loading");
+			  auto& tex = getTexture("loading");
 
 			  DrawTexturePro(tex, {0.f, 0.f, (float)tex.width, (float)tex.height}, {GetScreenWidth() / 2.f, GetScreenHeight() / 2.f, 
 					  tex.width * 2.f, tex.height * 2.f}, {(float)tex.width, (float)tex.height}, rotation, WHITE);

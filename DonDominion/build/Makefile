@@ -177,6 +177,54 @@ src/gameScene.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/gameScene.cpp.s
 .PHONY : src/gameScene.cpp.s
 
+src/helper.o: src/helper.cpp.o
+.PHONY : src/helper.o
+
+# target to build an object file
+src/helper.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/helper.cpp.o
+.PHONY : src/helper.cpp.o
+
+src/helper.i: src/helper.cpp.i
+.PHONY : src/helper.i
+
+# target to preprocess a source file
+src/helper.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/helper.cpp.i
+.PHONY : src/helper.cpp.i
+
+src/helper.s: src/helper.cpp.s
+.PHONY : src/helper.s
+
+# target to generate assembly for a file
+src/helper.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/helper.cpp.s
+.PHONY : src/helper.cpp.s
+
+src/hero.o: src/hero.cpp.o
+.PHONY : src/hero.o
+
+# target to build an object file
+src/hero.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/hero.cpp.o
+.PHONY : src/hero.cpp.o
+
+src/hero.i: src/hero.cpp.i
+.PHONY : src/hero.i
+
+# target to preprocess a source file
+src/hero.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/hero.cpp.i
+.PHONY : src/hero.cpp.i
+
+src/hero.s: src/hero.cpp.s
+.PHONY : src/hero.s
+
+# target to generate assembly for a file
+src/hero.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/hero.cpp.s
+.PHONY : src/hero.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -225,6 +273,30 @@ src/menuScene.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/menuScene.cpp.s
 .PHONY : src/menuScene.cpp.s
 
+src/objectScene.o: src/objectScene.cpp.o
+.PHONY : src/objectScene.o
+
+# target to build an object file
+src/objectScene.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/objectScene.cpp.o
+.PHONY : src/objectScene.cpp.o
+
+src/objectScene.i: src/objectScene.cpp.i
+.PHONY : src/objectScene.i
+
+# target to preprocess a source file
+src/objectScene.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/objectScene.cpp.i
+.PHONY : src/objectScene.cpp.i
+
+src/objectScene.s: src/objectScene.cpp.s
+.PHONY : src/objectScene.s
+
+# target to generate assembly for a file
+src/objectScene.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/res.dir/build.make CMakeFiles/res.dir/src/objectScene.cpp.s
+.PHONY : src/objectScene.cpp.s
+
 src/resource.o: src/resource.cpp.o
 .PHONY : src/resource.o
 
@@ -264,12 +336,21 @@ help:
 	@echo "... src/gameScene.o"
 	@echo "... src/gameScene.i"
 	@echo "... src/gameScene.s"
+	@echo "... src/helper.o"
+	@echo "... src/helper.i"
+	@echo "... src/helper.s"
+	@echo "... src/hero.o"
+	@echo "... src/hero.i"
+	@echo "... src/hero.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
 	@echo "... src/menuScene.o"
 	@echo "... src/menuScene.i"
 	@echo "... src/menuScene.s"
+	@echo "... src/objectScene.o"
+	@echo "... src/objectScene.i"
+	@echo "... src/objectScene.s"
 	@echo "... src/resource.o"
 	@echo "... src/resource.i"
 	@echo "... src/resource.s"

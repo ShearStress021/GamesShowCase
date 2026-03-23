@@ -50,7 +50,8 @@ namespace dominion {
 	{
 		BeginDrawing();
 			ClearBackground(BLACK);
-			DrawText("lalaladidada", 50, 50, 200, RED);
+	//		DrawText("lalaladidada", 50, 50, 200, RED);
+			hero.render(GetFrameTime());
 			DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, alpha));
 		EndDrawing();
 

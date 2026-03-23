@@ -100,10 +100,38 @@ CMakeFiles/res.dir/src/gameScene.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/res.dir/src/gameScene.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kanja/projects/GamesShowCase/DonDominion/src/gameScene.cpp -o CMakeFiles/res.dir/src/gameScene.cpp.s
 
+CMakeFiles/res.dir/src/helper.cpp.o: CMakeFiles/res.dir/flags.make
+CMakeFiles/res.dir/src/helper.cpp.o: /home/kanja/projects/GamesShowCase/DonDominion/src/helper.cpp
+CMakeFiles/res.dir/src/helper.cpp.o: CMakeFiles/res.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kanja/projects/GamesShowCase/DonDominion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/res.dir/src/helper.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/res.dir/src/helper.cpp.o -MF CMakeFiles/res.dir/src/helper.cpp.o.d -o CMakeFiles/res.dir/src/helper.cpp.o -c /home/kanja/projects/GamesShowCase/DonDominion/src/helper.cpp
+
+CMakeFiles/res.dir/src/helper.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/res.dir/src/helper.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kanja/projects/GamesShowCase/DonDominion/src/helper.cpp > CMakeFiles/res.dir/src/helper.cpp.i
+
+CMakeFiles/res.dir/src/helper.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/res.dir/src/helper.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kanja/projects/GamesShowCase/DonDominion/src/helper.cpp -o CMakeFiles/res.dir/src/helper.cpp.s
+
+CMakeFiles/res.dir/src/hero.cpp.o: CMakeFiles/res.dir/flags.make
+CMakeFiles/res.dir/src/hero.cpp.o: /home/kanja/projects/GamesShowCase/DonDominion/src/hero.cpp
+CMakeFiles/res.dir/src/hero.cpp.o: CMakeFiles/res.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kanja/projects/GamesShowCase/DonDominion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/res.dir/src/hero.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/res.dir/src/hero.cpp.o -MF CMakeFiles/res.dir/src/hero.cpp.o.d -o CMakeFiles/res.dir/src/hero.cpp.o -c /home/kanja/projects/GamesShowCase/DonDominion/src/hero.cpp
+
+CMakeFiles/res.dir/src/hero.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/res.dir/src/hero.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kanja/projects/GamesShowCase/DonDominion/src/hero.cpp > CMakeFiles/res.dir/src/hero.cpp.i
+
+CMakeFiles/res.dir/src/hero.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/res.dir/src/hero.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kanja/projects/GamesShowCase/DonDominion/src/hero.cpp -o CMakeFiles/res.dir/src/hero.cpp.s
+
 CMakeFiles/res.dir/src/main.cpp.o: CMakeFiles/res.dir/flags.make
 CMakeFiles/res.dir/src/main.cpp.o: /home/kanja/projects/GamesShowCase/DonDominion/src/main.cpp
 CMakeFiles/res.dir/src/main.cpp.o: CMakeFiles/res.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kanja/projects/GamesShowCase/DonDominion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/res.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kanja/projects/GamesShowCase/DonDominion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/res.dir/src/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/res.dir/src/main.cpp.o -MF CMakeFiles/res.dir/src/main.cpp.o.d -o CMakeFiles/res.dir/src/main.cpp.o -c /home/kanja/projects/GamesShowCase/DonDominion/src/main.cpp
 
 CMakeFiles/res.dir/src/main.cpp.i: cmake_force
@@ -117,7 +145,7 @@ CMakeFiles/res.dir/src/main.cpp.s: cmake_force
 CMakeFiles/res.dir/src/menuScene.cpp.o: CMakeFiles/res.dir/flags.make
 CMakeFiles/res.dir/src/menuScene.cpp.o: /home/kanja/projects/GamesShowCase/DonDominion/src/menuScene.cpp
 CMakeFiles/res.dir/src/menuScene.cpp.o: CMakeFiles/res.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kanja/projects/GamesShowCase/DonDominion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/res.dir/src/menuScene.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kanja/projects/GamesShowCase/DonDominion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/res.dir/src/menuScene.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/res.dir/src/menuScene.cpp.o -MF CMakeFiles/res.dir/src/menuScene.cpp.o.d -o CMakeFiles/res.dir/src/menuScene.cpp.o -c /home/kanja/projects/GamesShowCase/DonDominion/src/menuScene.cpp
 
 CMakeFiles/res.dir/src/menuScene.cpp.i: cmake_force
@@ -128,10 +156,24 @@ CMakeFiles/res.dir/src/menuScene.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/res.dir/src/menuScene.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kanja/projects/GamesShowCase/DonDominion/src/menuScene.cpp -o CMakeFiles/res.dir/src/menuScene.cpp.s
 
+CMakeFiles/res.dir/src/objectScene.cpp.o: CMakeFiles/res.dir/flags.make
+CMakeFiles/res.dir/src/objectScene.cpp.o: /home/kanja/projects/GamesShowCase/DonDominion/src/objectScene.cpp
+CMakeFiles/res.dir/src/objectScene.cpp.o: CMakeFiles/res.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kanja/projects/GamesShowCase/DonDominion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/res.dir/src/objectScene.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/res.dir/src/objectScene.cpp.o -MF CMakeFiles/res.dir/src/objectScene.cpp.o.d -o CMakeFiles/res.dir/src/objectScene.cpp.o -c /home/kanja/projects/GamesShowCase/DonDominion/src/objectScene.cpp
+
+CMakeFiles/res.dir/src/objectScene.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/res.dir/src/objectScene.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kanja/projects/GamesShowCase/DonDominion/src/objectScene.cpp > CMakeFiles/res.dir/src/objectScene.cpp.i
+
+CMakeFiles/res.dir/src/objectScene.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/res.dir/src/objectScene.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kanja/projects/GamesShowCase/DonDominion/src/objectScene.cpp -o CMakeFiles/res.dir/src/objectScene.cpp.s
+
 CMakeFiles/res.dir/src/resource.cpp.o: CMakeFiles/res.dir/flags.make
 CMakeFiles/res.dir/src/resource.cpp.o: /home/kanja/projects/GamesShowCase/DonDominion/src/resource.cpp
 CMakeFiles/res.dir/src/resource.cpp.o: CMakeFiles/res.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kanja/projects/GamesShowCase/DonDominion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/res.dir/src/resource.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kanja/projects/GamesShowCase/DonDominion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/res.dir/src/resource.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/res.dir/src/resource.cpp.o -MF CMakeFiles/res.dir/src/resource.cpp.o.d -o CMakeFiles/res.dir/src/resource.cpp.o -c /home/kanja/projects/GamesShowCase/DonDominion/src/resource.cpp
 
 CMakeFiles/res.dir/src/resource.cpp.i: cmake_force
@@ -146,8 +188,11 @@ CMakeFiles/res.dir/src/resource.cpp.s: cmake_force
 res_OBJECTS = \
 "CMakeFiles/res.dir/src/game.cpp.o" \
 "CMakeFiles/res.dir/src/gameScene.cpp.o" \
+"CMakeFiles/res.dir/src/helper.cpp.o" \
+"CMakeFiles/res.dir/src/hero.cpp.o" \
 "CMakeFiles/res.dir/src/main.cpp.o" \
 "CMakeFiles/res.dir/src/menuScene.cpp.o" \
+"CMakeFiles/res.dir/src/objectScene.cpp.o" \
 "CMakeFiles/res.dir/src/resource.cpp.o"
 
 # External object files for target res
@@ -155,14 +200,17 @@ res_EXTERNAL_OBJECTS =
 
 res: CMakeFiles/res.dir/src/game.cpp.o
 res: CMakeFiles/res.dir/src/gameScene.cpp.o
+res: CMakeFiles/res.dir/src/helper.cpp.o
+res: CMakeFiles/res.dir/src/hero.cpp.o
 res: CMakeFiles/res.dir/src/main.cpp.o
 res: CMakeFiles/res.dir/src/menuScene.cpp.o
+res: CMakeFiles/res.dir/src/objectScene.cpp.o
 res: CMakeFiles/res.dir/src/resource.cpp.o
 res: CMakeFiles/res.dir/build.make
 res: CMakeFiles/res.dir/compiler_depend.ts
-res: /usr/local/lib/libraylib.so.5.5.0
+res: /usr/local/lib/libraylib.so.6.0.0
 res: CMakeFiles/res.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kanja/projects/GamesShowCase/DonDominion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable res"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kanja/projects/GamesShowCase/DonDominion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable res"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/res.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

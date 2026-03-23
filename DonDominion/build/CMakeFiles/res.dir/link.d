@@ -4,10 +4,13 @@ res: \
   /usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o \
   CMakeFiles/res.dir/src/game.cpp.o \
   CMakeFiles/res.dir/src/gameScene.cpp.o \
+  CMakeFiles/res.dir/src/helper.cpp.o \
+  CMakeFiles/res.dir/src/hero.cpp.o \
   CMakeFiles/res.dir/src/main.cpp.o \
   CMakeFiles/res.dir/src/menuScene.cpp.o \
+  CMakeFiles/res.dir/src/objectScene.cpp.o \
   CMakeFiles/res.dir/src/resource.cpp.o \
-  /usr/local/lib/libraylib.so.5.5.0 \
+  /usr/local/lib/libraylib.so.6.0.0 \
   /usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so \
   /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/libm.so \
   /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/libm.so \
@@ -35,7 +38,11 @@ res: \
   /usr/lib/gcc/x86_64-linux-gnu/14/crtendS.o \
   /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crtn.o \
   /lib/x86_64-linux-gnu/libm.so.6 \
-  /lib64/ld-linux-x86-64.so.2
+  /lib/x86_64-linux-gnu/libX11.so.6 \
+  /lib64/ld-linux-x86-64.so.2 \
+  /lib/x86_64-linux-gnu/libxcb.so.1 \
+  /lib/x86_64-linux-gnu/libXau.so.6 \
+  /lib/x86_64-linux-gnu/libXdmcp.so.6
 
 /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/Scrt1.o:
 
@@ -47,13 +54,19 @@ CMakeFiles/res.dir/src/game.cpp.o:
 
 CMakeFiles/res.dir/src/gameScene.cpp.o:
 
+CMakeFiles/res.dir/src/helper.cpp.o:
+
+CMakeFiles/res.dir/src/hero.cpp.o:
+
 CMakeFiles/res.dir/src/main.cpp.o:
 
 CMakeFiles/res.dir/src/menuScene.cpp.o:
 
+CMakeFiles/res.dir/src/objectScene.cpp.o:
+
 CMakeFiles/res.dir/src/resource.cpp.o:
 
-/usr/local/lib/libraylib.so.5.5.0:
+/usr/local/lib/libraylib.so.6.0.0:
 
 /usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so:
 
@@ -109,4 +122,12 @@ CMakeFiles/res.dir/src/resource.cpp.o:
 
 /lib/x86_64-linux-gnu/libm.so.6:
 
+/lib/x86_64-linux-gnu/libX11.so.6:
+
 /lib64/ld-linux-x86-64.so.2:
+
+/lib/x86_64-linux-gnu/libxcb.so.1:
+
+/lib/x86_64-linux-gnu/libXau.so.6:
+
+/lib/x86_64-linux-gnu/libXdmcp.so.6:

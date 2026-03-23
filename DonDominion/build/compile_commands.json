@@ -13,6 +13,18 @@
 },
 {
   "directory": "/home/kanja/projects/GamesShowCase/DonDominion/build",
+  "command": "/usr/bin/c++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -DUSE_LIBTYPE_SHARED  -std=gnu++17 -o CMakeFiles/res.dir/src/helper.cpp.o -c /home/kanja/projects/GamesShowCase/DonDominion/src/helper.cpp",
+  "file": "/home/kanja/projects/GamesShowCase/DonDominion/src/helper.cpp",
+  "output": "CMakeFiles/res.dir/src/helper.cpp.o"
+},
+{
+  "directory": "/home/kanja/projects/GamesShowCase/DonDominion/build",
+  "command": "/usr/bin/c++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -DUSE_LIBTYPE_SHARED  -std=gnu++17 -o CMakeFiles/res.dir/src/hero.cpp.o -c /home/kanja/projects/GamesShowCase/DonDominion/src/hero.cpp",
+  "file": "/home/kanja/projects/GamesShowCase/DonDominion/src/hero.cpp",
+  "output": "CMakeFiles/res.dir/src/hero.cpp.o"
+},
+{
+  "directory": "/home/kanja/projects/GamesShowCase/DonDominion/build",
   "command": "/usr/bin/c++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -DUSE_LIBTYPE_SHARED  -std=gnu++17 -o CMakeFiles/res.dir/src/main.cpp.o -c /home/kanja/projects/GamesShowCase/DonDominion/src/main.cpp",
   "file": "/home/kanja/projects/GamesShowCase/DonDominion/src/main.cpp",
   "output": "CMakeFiles/res.dir/src/main.cpp.o"
@@ -22,6 +34,12 @@
   "command": "/usr/bin/c++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -DUSE_LIBTYPE_SHARED  -std=gnu++17 -o CMakeFiles/res.dir/src/menuScene.cpp.o -c /home/kanja/projects/GamesShowCase/DonDominion/src/menuScene.cpp",
   "file": "/home/kanja/projects/GamesShowCase/DonDominion/src/menuScene.cpp",
   "output": "CMakeFiles/res.dir/src/menuScene.cpp.o"
+},
+{
+  "directory": "/home/kanja/projects/GamesShowCase/DonDominion/build",
+  "command": "/usr/bin/c++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -DUSE_LIBTYPE_SHARED  -std=gnu++17 -o CMakeFiles/res.dir/src/objectScene.cpp.o -c /home/kanja/projects/GamesShowCase/DonDominion/src/objectScene.cpp",
+  "file": "/home/kanja/projects/GamesShowCase/DonDominion/src/objectScene.cpp",
+  "output": "CMakeFiles/res.dir/src/objectScene.cpp.o"
 },
 {
   "directory": "/home/kanja/projects/GamesShowCase/DonDominion/build",

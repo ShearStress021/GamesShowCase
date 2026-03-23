@@ -1,6 +1,7 @@
 #pragma once
 
 #include "scene.hpp"
+#include "hero.hpp"
 #include "raylib.h"
 
 namespace dominion {
@@ -10,6 +11,7 @@ namespace dominion {
 		Phase phase = Phase::FADEIN;
 		float alpha{1.f};
 		float fadeTimer{};
+		Hero hero{};
 
 
 		public:
