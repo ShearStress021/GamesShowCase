@@ -4,6 +4,13 @@
 
 namespace dominion 
 {
+	Vector2 getScreenSize() {
+		return {
+			static_cast<float>(GetScreenWidth()),
+			static_cast<float>(GetScreenHeight())
+		};
+	}
+
 	Vector2 getScreenCenter()
 	{
 		return {
@@ -13,7 +20,7 @@ namespace dominion
 	}
 	Vector2 getOrigin(const Vector2& size) {
 
-   		return {size.x / 2.f, size.y / 2.f};
+   		return Vector2Scale(size, 0.5f) ;
 	}
 
 	Rectangle getBox(const Texture& texture) {
@@ -41,6 +48,10 @@ namespace dominion
 	{
 		DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), color);
 	}
+	void drawTextureNoOrigin(const Texture &texture, const Vector2 &position, const Vector2 &size, const Color &color) {
+	   DrawTexturePro(texture, getBox(texture), {position.x, position.y, size.x, size.y}, {0, 0}, 0, color);
+	}
+
 
 
 }

@@ -3,6 +3,7 @@
 #include "scene.hpp"
 #include "hero.hpp"
 #include "raylib.h"
+#include "background.hpp"
 
 namespace dominion {
 
@@ -12,6 +13,8 @@ namespace dominion {
 		float alpha{1.f};
 		float fadeTimer{};
 		Hero hero{};
+		const Texture &backGround{getTexture("back")};
+		const Texture &foreGround{getTexture("ground")};
 
 
 		public:

@@ -1,5 +1,7 @@
 #pragma once
 #include "scene.hpp"
+#include "raylib.h"
+#include "resource.hpp"
 
 
 
@@ -13,6 +15,8 @@ namespace dominion {
 		float wideTimer{};
 		float alpha{1.f};
 		float rotation{};
+		const Texture &backGround{getTexture("back")};
+		const Texture &foreGround{getTexture("front")};
 		public:
 			GameScene();
 			~GameScene() = default;

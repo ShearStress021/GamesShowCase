@@ -19,7 +19,9 @@ namespace dominion
 	{
 		loadTexture("loading", "data/sprites/loading.png");
 
-		loadTexture("hero", "data/sprites/gang/Idle.png");
+//		loadTexture("hero", "data/sprites/gang/Idle.png");
+//		loadTexture("run", "data/sprites/gang/Run.png");
+		loadTextures();
 
 	}
 

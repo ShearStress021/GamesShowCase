@@ -4,9 +4,11 @@
 
 
 namespace dominion {
+
+	enum class HeroState {idle,walk,jumping, running};
 	class Hero {
 		private:
-			Texture2D& texture{getTexture("hero")};
+			Texture2D* texture{&getTexture("hero")};
 			unsigned maxFrames{};
 			unsigned frame{};
 			float runningTime{};
@@ -14,12 +16,16 @@ namespace dominion {
 			Rectangle frameRect{};
 			float width{};
 			float height{};
+			Vector2 velocity{};
+			HeroState state;
+			float leftRight{-1.f};
 
 		public:
 			~Hero();
 			Hero();
 			void render(float deltaTime);
 			void heroAnimate(float deltaTime);
+			void updateMovement();
 
 
 

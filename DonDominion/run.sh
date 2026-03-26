@@ -10,6 +10,7 @@ fi
 
 ./build/res
 
+rm -rf build
 
 
 
