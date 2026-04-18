@@ -1,33 +1,42 @@
 #pragma once
-#include "raylib.h"
-#include "resource.hpp"
+#include "resourceManager.hpp"
+#include "animation.hpp"
+#include "map.hpp"
 
 
 namespace dominion {
 
-	enum class HeroState {idle,walk,jumping, running};
+
 	class Hero {
+		public:
+			Hero();
+			~Hero();
+
+			void render();
+			void makeAnimation();
+			void updatePlayer(Map& map);
+
+			
+			Vector2 getCenter();
+		    Rectangle getBounds();
+
+
+
+
+
 		private:
-			Texture2D* texture{&getTexture("hero")};
-			unsigned maxFrames{};
-			unsigned frame{};
-			float runningTime{};
-			float updateTime{1/12.f};
+			//Animation anim{};
+			Texture2D* texture{&getTexture("IDLE")};
+			Vector2 pos,vel, prev;
 			Rectangle frameRect{};
 			float width{};
 			float height{};
-			Vector2 velocity{};
-			HeroState state;
-			float leftRight{-1.f};
-
-		public:
-			~Hero();
-			Hero();
-			void render(float deltaTime);
-			void heroAnimate(float deltaTime);
-			void updateMovement();
-
+			int  maxFrames{};
+			int frame{};
+			float runningTime{};
+			float updateTime{1/18.f};
 
 
 	};
+
 }

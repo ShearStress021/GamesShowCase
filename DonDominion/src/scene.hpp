@@ -1,24 +1,40 @@
 #pragma once
 #include <memory>
-#include <deque>
+#include "raylib.h"
+
 
 namespace dominion {
-	class Scene;
-
-	using ScenePtr = std::unique_ptr<Scene>;
-	using Scenes = std::deque<ScenePtr>;
-
 	class Scene {
-		public:
-			bool quitScene = false;
 
+		public:
 			Scene() = default;
 			virtual ~Scene() = default;
-			
 
+
+			// virtual methods
 			virtual void update() = 0;
 			virtual void render() = 0;
-			virtual void change(Scenes& scenes) = 0;
+			virtual void fixedUpdate() = 0;
+			virtual std::shared_ptr<Scene> change() = 0;
+
+
+			// methods
+			void updateStateLogic();
+		    void updateFadingIn();
+		    void updateFadingOut();
+
+
+
+			bool quitScene= false;
+			bool fadingIn = true;
+		    bool fadingOut = false;
+		    float fadeTimer = 0.0f;
+
+			float realDt = 0.0f; // Real DT should be used for timers, whereas DT for everything else
+            float dt = 0.0f;
+			float alpha = 0.0f;
+
 	};
 
 }
+

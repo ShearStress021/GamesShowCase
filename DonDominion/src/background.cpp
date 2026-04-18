@@ -1,5 +1,4 @@
 #include "background.hpp"
-#include "helper.hpp"
 
 namespace dominion {
 
@@ -61,4 +60,3 @@ namespace dominion {
 
 
 }
-

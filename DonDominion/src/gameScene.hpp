@@ -1,39 +1,35 @@
-#pragma once
+#pragma once 
+#include "hero.hpp"
 #include "scene.hpp"
-#include "raylib.h"
-#include "resource.hpp"
+#include "menuScene.hpp"
+#include "map.hpp"
+#include "resourceManager.hpp"
+#include "utils.hpp"
 
 
 
 namespace dominion {
 
-	class GameScene : public Scene 
-	{
-		enum class Phase {FADEIN, LOAD, FADEOUT};
-		Phase phase = Phase::FADEIN;
-		float fadeTimer{};
-		float wideTimer{};
-		float alpha{1.f};
-		float rotation{};
-		const Texture &backGround{getTexture("back")};
-		const Texture &foreGround{getTexture("front")};
+	class GameScene : public Scene {
 		public:
 			GameScene();
-			~GameScene() = default;
-			void render() override;
-
-			static ScenePtr make()
-			{
-				return std::make_unique<GameScene>();
-			}
+			~GameScene();
 
 			void update() override;
-			void change(Scenes& scenes) override;
-			void updateLoading();
-			void updateFadeIn();
-			void updateFadeOut();
+			void render() override;
+			void fixedUpdate() override;
+			void updateControls();
+			void updateEnviroment();
+
+			std::shared_ptr<Scene> change() override;
+
+//			Hero hero{};
+		private:
+			Map map;
+			Hero hero;
+			Camera2D camera{};
 
 	};
 
-
 }
+

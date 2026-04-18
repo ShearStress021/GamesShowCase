@@ -14,3 +14,4 @@ add_executable(res ${SOURCES})
 
 find_package(raylib REQUIRED)
 target_link_libraries(res PRIVATE raylib)
+

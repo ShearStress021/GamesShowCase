@@ -1,103 +1,86 @@
 #include "gameScene.hpp"
-#include "menuScene.hpp"
-#include "resource.hpp"
-#include <csetjmp>
-#include <iostream>
+#include "random.hpp"
 
 
 
-namespace dominion 
-{
-	namespace 
-	{
-		constexpr float fadeTime{.5f};
-		constexpr float waitTime{.5f};
+
+namespace dominion {
+
+	static int index = 0;
+
+	static const char* blockMap[] {
+		"grass", "panel","dirt", "ground", "brick"
+	};
+
+
+	GameScene::GameScene() {
+
+		camera.zoom = 1.f;
+		camera.target = hero.getCenter();
+		camera.offset = getScreenCenter();
+
+	}
+	GameScene::~GameScene() {
 
 	}
 
-	GameScene::GameScene()
-	{
-		loadTexture("loading", "data/sprites/loading.png");
+	void GameScene::render() {
+		BeginMode2D(camera);
 
-//		loadTexture("hero", "data/sprites/gang/Idle.png");
-//		loadTexture("run", "data/sprites/gang/Run.png");
-		loadTextures();
+		map.render(camera);
+		hero.render();
+		EndMode2D();
 
-	}
-
-	void GameScene::update()
-	{
-		rotation += GetFrameTime() * 360.f;
-		switch(phase)
-		{
-			case Phase::FADEIN: updateFadeIn(); break;
-			case Phase::LOAD:  updateLoading(); break;
-			case Phase::FADEOUT: updateFadeOut(); break;
-
-		}
-	}
-
-
-	void GameScene::change(Scenes& scenes)
-	{
-		scenes.push_back(MenuScene::make());
-
-	}
-
-	void GameScene::updateFadeIn()
-	{
-		fadeTimer += GetFrameTime();
-
-		alpha = 1.f - fadeTimer / fadeTime;
-		if (fadeTimer >= fadeTime)
-		{
-			fadeTimer = alpha = 0.f;
-			phase = Phase::LOAD;
-		}
-	}
-
-
-	void GameScene::updateFadeOut()
-	{
-		wideTimer += GetFrameTime();
-		if(wideTimer < waitTime)
-		{
-			return ;
-		}
-
-		fadeTimer += GetFrameTime();
-		alpha  = fadeTimer / fadeTime;
-
-		if(fadeTimer >= fadeTime)
-		{
-			alpha = 1.f;
-			quitScene = true;
-		}
-
-
-	}
-
-
-
-	void GameScene::updateLoading()
-	{
-		loadTextures();
-		phase = Phase::FADEOUT;
-	}
-
-	void GameScene::render()
-	{
-		BeginDrawing();
-			ClearBackground(BLACK);
-			  auto& tex = getTexture("loading");
-
-			  DrawTexturePro(tex, {0.f, 0.f, (float)tex.width, (float)tex.height}, {GetScreenWidth() / 2.f, GetScreenHeight() / 2.f, 
-					  tex.width * 2.f, tex.height * 2.f}, {(float)tex.width, (float)tex.height}, rotation, WHITE);
-      		  DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, alpha));
-		EndDrawing();
+		drawTexture(getTexture(blockMap[index]), {GetScreenWidth() - 75.f, GetScreenHeight() - 75.f}, {50.f, 50.f}, 0.f,WHITE);
 		
 	}
+
+	void GameScene::fixedUpdate() {
+
+//		hero.updatePlayer(GetFrameTime());
 		
-		
+
+	}
+
+	std::shared_ptr<Scene> GameScene::change() {
+		return std::make_shared<MenuScene>();
+	}
+
+	void GameScene::update() {
+		updateControls();
+		updateEnviroment();
+	}
+
+	void GameScene::updateControls(){
+		hero.updatePlayer(map);
+
+		camera.target = lerp(camera.target, hero.getCenter(), 25.f*GetFrameTime());
+
+	
+
+	}
+	void GameScene::updateEnviroment(){
+
+		for (int y = map.sizeY -1;y >= 0; --y){
+			for(int x = map.sizeX -1; x >= 0; --x){
+				auto& block = map[y][x];
+				
+				if(block.type == Block::grass) {
+					if(map[y][x].value2 == 0){
+						map[y][x].value2 = random(100, 255);
+						
+					}
+					++map[y][x].value;
+					if (map[y][x].value >= map[y][x].value2){
+						map[y][x].value = 0;
+						map.setBlock(x,y,"dirt");
+					}
+				}
+
+
+			}
+		}
+	}
 
 }
+

@@ -1,8 +1,7 @@
-
 #pragma once
 
 #include "raylib.h"
-#include "helper.hpp"
+#include "utils.hpp"
 
 
 namespace dominion {
