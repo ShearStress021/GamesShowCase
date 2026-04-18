@@ -7,7 +7,7 @@ namespace dominion {
 	constexpr Vector2 size {2.f, 3.f};
 
 	Hero::Hero(){
-		maxFrames = 10;
+		maxFrames = 7;
 		vel = {0,0};
 //		pos = {GetScreenWidth()/4.f, GetScreenHeight()/2.f};
 		prev = pos;
@@ -38,7 +38,7 @@ namespace dominion {
 
 	void  Hero::render(){
 
-		Rectangle dest{pos.x, pos.y,width*2.f, height*2.f};
+		Rectangle dest{pos.x, pos.y,width*1.5f, height*1.5f};
 		DrawTexturePro(*texture,frameRect,dest,Vector2{},0.f,WHITE);
 
 

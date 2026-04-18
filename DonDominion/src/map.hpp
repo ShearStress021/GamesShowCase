@@ -12,46 +12,37 @@
 
 namespace dominion {
 
+	constexpr int TILE_SIZE = 32;
+    constexpr int MAP_COLS  = 80;
+    constexpr int MAP_ROWS  = 16;
+
+
+	enum class BlockType :  unsigned char {
+		air=0, grass, panel, brick,ground,dirt
+	};
+
 
 	struct Block {
-		enum Type {grass, panel, brick,ground,dirt};
-		using id_t = unsigned char;
-
-
+		BlockType type = BlockType::air;
 		Texture* tex = nullptr;
-		Type type = Type::grass;
-
-		id_t id = 0;
-		unsigned char value = 0;
-		unsigned char value2 = 0;
-		static int getId(const std::string& name);
-		
-
-
 
 	};
 
 
 	class Map{
 		public:
-		   void init();
-		   void render(Camera2D& camera);
-		   int sizeX = 0;
-			int sizeY = 0;
-
-		   bool isPositionValid(int x, int y);
-		   bool is(int x, int y, Block::Type type);
-		   bool isTransparent(int x, int y);
-
-		   std::vector<Block>& operator[](size_t index);
-			void setBlock(int x, int y, const std::string& name);
-			void setBlock(int x, int y, Block::id_t id);
-			void deleteBlock(int x, int y);
-			void moveBlock(int ox, int oy, int nx, int ny);
+			Map();
+			~Map()=default;
+		   void render();
+		   int worldWidth() const {return MAP_COLS * TILE_SIZE;}
+		   int worldHeight() const {return MAP_ROWS * TILE_SIZE;}
+		   void generate();
 
 		private:
 			std::vector<std::vector<Block>> blocks;
 
+			void setBlock(int x, int y, BlockType type);
+			void drawTile(int col, int row) const;
 
 
 

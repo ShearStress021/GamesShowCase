@@ -26,7 +26,7 @@ namespace dominion {
 
 		private:
 			//Animation anim{};
-			Texture2D* texture{&getTexture("IDLE")};
+			Texture2D* texture{&getTexture("hero")};
 			Vector2 pos,vel, prev;
 			Rectangle frameRect{};
 			float width{};
