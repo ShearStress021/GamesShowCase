@@ -4,8 +4,8 @@
 
 
 
-constexpr int minWindowWidth  = 920;
-constexpr int minWindowHeight = 720;
+constexpr int minWindowWidth  = 1080;
+constexpr int minWindowHeight = 920;
 
 
 int main() {

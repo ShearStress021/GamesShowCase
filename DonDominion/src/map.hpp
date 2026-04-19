@@ -37,6 +37,9 @@ namespace dominion {
 		   int worldWidth() const {return MAP_COLS * TILE_SIZE;}
 		   int worldHeight() const {return MAP_ROWS * TILE_SIZE;}
 		   void generate();
+		   bool isSolid(int col, int row) const ;
+		   bool isSolidAtWorld(float worldX, float worldY) const;
+		   Rectangle getTileRect(int col, int row) const;
 
 		private:
 			std::vector<std::vector<Block>> blocks;
@@ -46,9 +49,6 @@ namespace dominion {
 
 
 
-
-		   const Texture &backGround{getTexture("back")};
-		   const Texture &foreGround{getTexture("ground")};
 
 
 		   // Render map

@@ -44,38 +44,44 @@ namespace dominion {
 
 	void Map::generate(){
 		// ground level row (0 = top, MAP_ROWS-1 = bottom)
-        const int groundRow = MAP_ROWS - 4;
+        const int groundLevel = 14; 
 
         for (int col = 0; col < MAP_COLS; col++) {
+			for(int row = 0; row < MAP_ROWS; row++){
+				if (row < groundLevel) {
+					setBlock(col, row, BlockType::air);
+				} else if (row == groundLevel) {
+					setBlock(col, row, BlockType::brick); // The surface
+				} else {
+					setBlock(col, row, BlockType::dirt);  // Fill everything below
+				}
 
-            // --- flat terrain base ---
-//            setBlock(col, groundRow ,     BlockType::grass);
-            setBlock(col, groundRow + 1, BlockType::dirt);
-            setBlock(col, groundRow + 2, BlockType::dirt);
-            setBlock(col, groundRow - 1 , BlockType::brick); // bedrock
+			}
 
-            // --- raised platforms every 12 columns ---
-     //       if (col % 12 == 3) {
-       ///         int platformRow = groundRow - 3;
-          ///      for (int pc = col; pc < col + 4 && pc < MAP_COLS; pc++) {
-             //       setBlock(pc, platformRow, BlockType::panel);
-               // }
-            //}
-
-            // --- brick pillars every 20 columns ---
-           // if (col % 20 == 10) {
-             //   setBlock(col, groundRow - 1, BlockType::brick);
-               // setBlock(col, groundRow - 2, BlockType::brick);
-            //}
-
-            //if (col % 6 == 2){
-              //  int brickRow = groundRow - 3;
-                //for(int pc = col; pc < col + 3 && pc < MAP_COLS; pc++){
-                  //  setBlock(pc, brickRow, BlockType::brick);
-                //}
-                //setBlock(col, groundRow - 1, BlockType::brick);
-            }
+			setBlock(col, 16-1, BlockType::dirt);
         }
+	}
+
+	bool Map::isSolid(int col, int row) const {
+		if (col < 0 || col >= MAP_COLS || row < 0 || row >= MAP_ROWS) return true; // Bounds check
+		return blocks[row][col].type != BlockType::air;
+
+
+	}
+
+	bool Map::isSolidAtWorld(float worldX, float worldY) const {
+
+		float screenH = (float)GetScreenHeight();
+
+//		float mapTopY = screenH - (MAP_ROWS * TILE_SIZE);
+		int col = (int)(worldX / TILE_SIZE);
+		int row = (int)((worldY )/ TILE_SIZE);
+		return isSolid(col, row);
+	}
+
+	Rectangle Map::getTileRect(int col, int row) const {
+		return { col * TILE_SIZE * 1.f, row * TILE_SIZE * 1.f,
+				 TILE_SIZE * 1.f,       TILE_SIZE * 1.f };
 	}
 
 	void Map::drawTile(int col, int row) const {
@@ -83,10 +89,10 @@ namespace dominion {
 		const auto& b = blocks[row][col];
         if (b.type == BlockType::air || b.tex == nullptr) return;
 
-        float height = GetScreenHeight();
+//        float height = GetScreenHeight();
 
         float x = col * TILE_SIZE;
-        float y = height - ((MAP_ROWS - row) * TILE_SIZE);
+        float y =   row * TILE_SIZE;
 
         Rectangle src  { 0.f, 0.f, (float)b.tex->width, (float)b.tex->height };
         Rectangle dest { x,   y,   (float)TILE_SIZE,     (float)TILE_SIZE     };
@@ -96,7 +102,6 @@ namespace dominion {
 	}
 
 	void Map::render() {
-		 drawBackGround(backGround, foreGround, 0.001f, 0.002f, 0.2f);
 		  for (int row = 0; row < MAP_ROWS; row++)
             for (int col = 0; col < MAP_COLS; col++)
                 drawTile(col, row);

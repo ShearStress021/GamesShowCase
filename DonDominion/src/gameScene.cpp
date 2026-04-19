@@ -1,5 +1,6 @@
 #include "gameScene.hpp"
 #include "random.hpp"
+#include "background.hpp"
 
 
 
@@ -16,9 +17,11 @@ namespace dominion {
 
 	GameScene::GameScene() {
 
+
 		camera.zoom = 1.f;
-//		camera.target = hero.getCenter();
-//		camera.offset = getScreenCenter();
+		camera.target = hero.pos;
+		camera.offset = getScreenCenter();
+		camera.rotation = 0.0f;
 
 	}
 	GameScene::~GameScene() {
@@ -26,6 +29,7 @@ namespace dominion {
 	}
 
 	void GameScene::render() {
+	 drawBackGround(backGround, foreGround, 0.0001f, 0.0002f, 0.002f);
 		BeginMode2D(camera);
 
 		map.render();
@@ -54,6 +58,8 @@ namespace dominion {
 
 	void GameScene::updateControls(){
 		hero.updatePlayer(map);
+//		 Rectangle b      = hero.getBounds();
+		 //camera.target    = { b.x + b.width / 2.f, b.y + b.height / 2.f };
 
 //		camera.target = lerp(camera.target, hero.getCenter(), 25.f*GetFrameTime());
 

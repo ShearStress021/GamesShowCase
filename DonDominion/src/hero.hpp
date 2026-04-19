@@ -15,10 +15,12 @@ namespace dominion {
 			void render();
 			void makeAnimation();
 			void updatePlayer(Map& map);
+			void updateMovement();
 
 			
 			Vector2 getCenter();
-		    Rectangle getBounds();
+		    Rectangle getBounds() const;
+			Vector2 pos,vel, prev;
 
 
 
@@ -27,7 +29,6 @@ namespace dominion {
 		private:
 			//Animation anim{};
 			Texture2D* texture{&getTexture("hero")};
-			Vector2 pos,vel, prev;
 			Rectangle frameRect{};
 			float width{};
 			float height{};
@@ -35,6 +36,11 @@ namespace dominion {
 			int frame{};
 			float runningTime{};
 			float updateTime{1/18.f};
+			bool onGround = false;
+
+			void applyGravity();
+			void resolveCollision(Map& map);
+
 
 
 	};
