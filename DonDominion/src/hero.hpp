@@ -38,6 +38,11 @@ namespace dominion {
 			Rectangle frameRect{};
 			float width{};
 			float height{};
+
+			float drawWidth{};
+			float drawHeight{};
+			float collisionWidth{};   // tighter box for actual collision
+			float collisionHeight{};
 			int  maxFrames{};
 			int frame{};
 			float runningTime{};

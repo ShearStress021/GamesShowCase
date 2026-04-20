@@ -18,12 +18,20 @@ namespace dominion {
 		prev = pos;
 		width = texture->width*1.f/ maxFrames;
 		height = texture->height;
+
+		drawWidth =  width * 1.5f;
+		drawHeight = height  * 1.5f;
+
+		collisionWidth = drawWidth * 0.45f;
+		collisionHeight = drawHeight * 0.85f;
+
 		frameRect = {0.f,0.f, (float)width , (float)height};
 		bulletSpeed = 500.f;
 		
 	}
 
 	Hero::~Hero(){
+		UnloadTexture(*texture);
 
 	}
 	void Hero::updatePlayer(Map& map){
@@ -47,6 +55,7 @@ namespace dominion {
 
 		if (IsKeyDown(KEY_A))
 		{
+			state = HeroState::walk;
 			dirx -= 1.0;
 			leftRight = -1.f;
 
@@ -55,6 +64,7 @@ namespace dominion {
 
 		if (IsKeyDown(KEY_D))
 		{
+			state = HeroState::walk;
 			dirx += 1.0;
 			leftRight = 1.f;
 		}
@@ -63,13 +73,14 @@ namespace dominion {
 			shot = true;
 
 
+			float offset = leftRight == 1 ? 1 : 0;
+
+
 			Bullet newBullet;
 			const float left{4};
             const float right{24};
 			const float t = (width + 1)/4.0f;
-			const float offset = left + right * t;
-			std::cout << "offset" << offset << '\n';
-			newBullet.pos = {pos.x + (width / 2.f) + 50.f, pos.y + (height-17.f )};
+			newBullet.pos = {pos.x +(width/3.f) + (68.f * offset), pos.y + (height-19.f )};
 			newBullet.vel = {bulletSpeed * leftRight , 0};
 			newBullet.active = true;
 			bullets.push_back(newBullet);
@@ -147,6 +158,7 @@ namespace dominion {
 		}
 
 
+		pos.x += dirx;
 
 
 	}
@@ -165,9 +177,10 @@ namespace dominion {
 	void  Hero::render(){
 
 		frameRect.width = width * leftRight;
-		Rectangle dest{pos.x, pos.y,width*1.5f, height*1.5f};
+		Rectangle dest{pos.x, pos.y,drawWidth, drawWidth};
 		DrawTexturePro(*texture,frameRect,dest,Vector2{},0.f,WHITE);
 		DrawRectangleLinesEx(dest,2.f,RED);
+		DrawRectangleLinesEx(getBounds(), 2.f, RED);
 //
 //
 		for(const auto& b : bullets){
@@ -176,7 +189,7 @@ namespace dominion {
 				Rectangle bulletSrc{0,0,bullet->width/4.f,bullet->height/1.f};
 				Rectangle bulletDest{b.pos.x, b.pos.y, bullet->width/1.f, bullet->height/1.f};
 				DrawTexturePro(*bullet,bulletSrc,bulletDest,Vector2{},0,WHITE);
-//				DrawCircleV(b.pos, 5.f, YELLOW);
+			//	DrawCircleV(b.pos, 5.f, YELLOW);
 			}
 		}
 
@@ -246,7 +259,10 @@ namespace dominion {
 	}
 
 	Rectangle Hero::getBounds() const {
-		return { pos.x, pos.y, width * 1.5f, height * 1.5f };
+
+		float offsetX = (drawWidth  - collisionWidth)  / 2.f;  // center horizontally
+		float offsetY = (drawHeight - collisionHeight);         // pin to feet
+		return { pos.x  , pos.y  , drawWidth, drawHeight};
 	}
 
 	void Hero::applyGravity(){

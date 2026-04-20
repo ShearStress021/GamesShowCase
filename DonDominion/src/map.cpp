@@ -57,21 +57,21 @@ namespace dominion {
 					setBlock(col, row, BlockType::dirt);  // Fill everything below
 				}
 
-			}
-
-        }
+		    if (col % 12 == 3) {
+                int platformRow = groundLevel - 1;
+                for (int pc = col; pc < col + 4 && pc < MAP_COLS; pc++) {
+        //            setBlock(pc, platformRow, BlockType::panel); 
+				} 
+			  } 
+			} 
+		} 
+	} 
+    bool Map::isSolid(int col, int row) const { 
+	  if (col < 0 || col >= MAP_COLS || row < 0 || row >= MAP_ROWS) return true; // Bounds check 
+	  return blocks[row][col].type != BlockType::air;
 	}
 
-	bool Map::isSolid(int col, int row) const {
-		if (col < 0 || col >= MAP_COLS || row < 0 || row >= MAP_ROWS) return true; // Bounds check
-		return blocks[row][col].type != BlockType::air;
-
-
-	}
-
-	bool Map::isSolidAtWorld(float worldX, float worldY) const {
-
-		float screenH = (float)GetScreenHeight();
+    bool Map::isSolidAtWorld(float worldX, float worldY) const{
 
 //		float mapTopY = screenH - (MAP_ROWS * TILE_SIZE);
 		int col = (int)(worldX / TILE_SIZE);
