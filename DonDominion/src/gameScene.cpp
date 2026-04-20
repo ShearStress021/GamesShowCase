@@ -58,10 +58,23 @@ namespace dominion {
 
 	void GameScene::updateControls(){
 		hero.updatePlayer(map);
-//		 Rectangle b      = hero.getBounds();
-		 //camera.target    = { b.x + b.width / 2.f, b.y + b.height / 2.f };
 
-//		camera.target = lerp(camera.target, hero.getCenter(), 25.f*GetFrameTime());
+		camera.target = hero.pos;
+			// 2. Clamp the Camera X
+		// Don't let the camera look further left than half a screen width
+		float minX = camera.offset.x / camera.zoom;
+		if (camera.target.x < minX) {
+			camera.target.x = minX;
+		}
+
+		// Optional: Clamp the Camera Y to keep the ground at the bottom
+		// This prevents the camera from "looking down" into the void below the dirt
+		float maxY = (MAP_ROWS * TILE_SIZE) - (camera.offset.y / camera.zoom);
+		if (camera.target.y > maxY) {
+			camera.target.y = maxY;
+		}
+
+
 
 	
 

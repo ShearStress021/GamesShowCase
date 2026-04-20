@@ -1,11 +1,15 @@
 #include "hero.hpp"
 #include <iostream>
+#include <map>
+#include <algorithm>
 
 
 
 namespace dominion {
 	constexpr Vector2 size {2.f, 3.f};
 	constexpr float GRAVITY   = 900.f;
+
+	
 
 	Hero::Hero(){
 		maxFrames = 7;
@@ -15,6 +19,7 @@ namespace dominion {
 		width = texture->width*1.f/ maxFrames;
 		height = texture->height;
 		frameRect = {0.f,0.f, (float)width , (float)height};
+		bulletSpeed = 500.f;
 		
 	}
 
@@ -22,7 +27,10 @@ namespace dominion {
 
 	}
 	void Hero::updatePlayer(Map& map){
-		makeAnimation();
+		float deltaTime = GetFrameTime();
+		makeAnimation(deltaTime);
+		updateBullets(deltaTime);
+		updateMovement(deltaTime);
 		onGround = false;
 
 		applyGravity();
@@ -30,13 +38,124 @@ namespace dominion {
 		resolveCollision(map);
 		
 	}
-	void Hero::makeAnimation(){
-		runningTime += GetFrameTime();
+
+	void Hero::updateMovement(float deltaTime){
+		int dirx{0};
+		int diry{0};
+		int speed{0};
+		bool shot{false};
+
+		if (IsKeyDown(KEY_A))
+		{
+			dirx -= 1.0;
+			leftRight = -1.f;
+
+		}
+
+
+		if (IsKeyDown(KEY_D))
+		{
+			dirx += 1.0;
+			leftRight = 1.f;
+		}
+		if (IsKeyDown(KEY_J)){
+			state = HeroState::shot;
+			shot = true;
+
+
+			Bullet newBullet;
+			const float left{4};
+            const float right{24};
+			const float t = (width + 1)/4.0f;
+			const float offset = left + right * t;
+			std::cout << "offset" << offset << '\n';
+			newBullet.pos = {pos.x + (width / 2.f) + 50.f, pos.y + (height-17.f )};
+			newBullet.vel = {bulletSpeed * leftRight , 0};
+			newBullet.active = true;
+			bullets.push_back(newBullet);
+
+
+
+		}
+
+		if (IsKeyDown(KEY_LEFT_SHIFT)) speed += 60.0f;
+
+		std::string resultD = "Direction X output: ";
+		resultD += std::to_string(dirx);
+//		DrawText(resultD.c_str(),0.f,0.f,40,RED);
+
+		std::map<HeroState, std::string> heroStates = {
+
+			{HeroState::idle, "idle"},
+			{HeroState::walk, "running"},
+			{HeroState::jumping, "jumping"},
+			{HeroState::shot, "shot"}
+
+
+		};
+
+		std::string outState = "current state: ";
+
+		outState += heroStates[state];
+
+
+
+//		outState.append(std::to_string())
+
+//		DrawText(outState.c_str(),0.f,20.f,40,RED);
+
+
+
+		switch(state)
+		{
+			case HeroState::idle:
+				if(dirx) state = HeroState::walk;
+				if(speed) state = HeroState::running;
+				if(shot) state = HeroState::shot;
+				break;
+
+			case HeroState::walk:
+			   if(!dirx) state = HeroState::idle;
+			   break;
+			case HeroState::jumping:
+			   if(diry) state = HeroState::jumping;
+			   break;
+			case HeroState::running:
+			   if(!speed) state = HeroState::idle;
+			case HeroState::shot:
+			   if(!shot) state = HeroState::idle;
+			
+
+
+		}
+
+		if(state == HeroState::idle)
+		{
+			texture = &getTexture("hero");
+			maxFrames = 14;
+		} else if (state == HeroState::walk)
+		{
+			texture = &getTexture("walk");
+			maxFrames = 10;
+		} else if (state == HeroState::running){
+			texture = &getTexture("run");
+			maxFrames = 10;
+
+		}else if(state == HeroState::shot){
+			texture = &getTexture("shot");
+			maxFrames = 3;
+		}
+
+
+
+
+	}
+	void Hero::makeAnimation(float deltaTime){
+		runningTime += deltaTime;
 		if (runningTime > updateTime){
 			++frame;
 			runningTime = 0.f;
-			frame %= maxFrames;
-
+			if(frame > maxFrames) frame = 0;
 			frameRect.x = (float) width * frame;
 
 		}
@@ -45,9 +164,21 @@ namespace dominion {
 
 	void  Hero::render(){
 
+		frameRect.width = width * leftRight;
 		Rectangle dest{pos.x, pos.y,width*1.5f, height*1.5f};
 		DrawTexturePro(*texture,frameRect,dest,Vector2{},0.f,WHITE);
-//		DrawRectangleLinesEx(dest,2.f,RED);
+		DrawRectangleLinesEx(dest,2.f,RED);
+//
+//
+		for(const auto& b : bullets){
+			if(b.active){
+				Texture2D *bullet = &getTexture("bullet");
+				Rectangle bulletSrc{0,0,bullet->width/4.f,bullet->height/1.f};
+				Rectangle bulletDest{b.pos.x, b.pos.y, bullet->width/1.f, bullet->height/1.f};
+				DrawTexturePro(*bullet,bulletSrc,bulletDest,Vector2{},0,WHITE);
+//				DrawCircleV(b.pos, 5.f, YELLOW);
+			}
+		}
 
 
 	}
@@ -89,6 +220,23 @@ namespace dominion {
 			}
 		}
 
+
+	}
+
+	
+
+	void Hero::updateBullets(float deltaTime) {
+		for(int i = 0; i < bullets.size(); i++){
+			if(bullets[i].active){
+				bullets[i].pos.x += bullets[i].vel.x * deltaTime;
+//				std::cout << bullets[i].pos.x << "\n";
+
+			}
+		}
+
+		bullets.erase(std::remove_if(bullets.begin(), bullets.end(), [](const Bullet& b) {
+						return !b.active;
+						}), bullets.end());
 
 	}
 

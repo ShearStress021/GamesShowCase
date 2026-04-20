@@ -18,6 +18,7 @@ namespace dominion {
 			case BlockType::brick: return "brick";
 			case BlockType::panel: return "panel";
 			case BlockType::ground: return "ground";
+			case BlockType::floor: return "floor";
 			default:              return nullptr;
 
 
@@ -51,14 +52,13 @@ namespace dominion {
 				if (row < groundLevel) {
 					setBlock(col, row, BlockType::air);
 				} else if (row == groundLevel) {
-					setBlock(col, row, BlockType::brick); // The surface
+					setBlock(col, row, BlockType::floor); // The surface
 				} else {
 					setBlock(col, row, BlockType::dirt);  // Fill everything below
 				}
 
 			}
 
-			setBlock(col, 16-1, BlockType::dirt);
         }
 	}
 

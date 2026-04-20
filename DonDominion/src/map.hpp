@@ -18,7 +18,7 @@ namespace dominion {
 
 
 	enum class BlockType :  unsigned char {
-		air=0, grass, panel, brick,ground,dirt
+		air=0, grass, panel, brick,ground,dirt,floor
 	};
 
 
