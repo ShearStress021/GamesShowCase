@@ -2,7 +2,7 @@
 #include <iostream>
 #include <map>
 #include <algorithm>
-
+#include <string>
 
 
 namespace dominion {
@@ -14,10 +14,11 @@ namespace dominion {
 	Hero::Hero(){
 		maxFrames = 7;
 		vel = {0,0};
-		pos = {100.f, 100.f};
+		pos = {0.f, 0.f};
 		prev = pos;
 		width = texture->width*1.f/ maxFrames;
 		height = texture->height;
+		state = HeroState::idle;
 
 		drawWidth =  width * 1.5f;
 		drawHeight = height  * 1.5f;
@@ -55,8 +56,7 @@ namespace dominion {
 
 		if (IsKeyDown(KEY_A))
 		{
-			state = HeroState::walk;
-			dirx -= 1.0;
+			dirx = -1.0;
 			leftRight = -1.f;
 
 		}
@@ -64,12 +64,10 @@ namespace dominion {
 
 		if (IsKeyDown(KEY_D))
 		{
-			state = HeroState::walk;
-			dirx += 1.0;
+			dirx = 1.0;
 			leftRight = 1.f;
 		}
 		if (IsKeyDown(KEY_J)){
-			state = HeroState::shot;
 			shot = true;
 
 
@@ -84,6 +82,7 @@ namespace dominion {
 			newBullet.vel = {bulletSpeed * leftRight , 0};
 			newBullet.active = true;
 			bullets.push_back(newBullet);
+			
 
 
 
@@ -93,27 +92,8 @@ namespace dominion {
 
 		std::string resultD = "Direction X output: ";
 		resultD += std::to_string(dirx);
-//		DrawText(resultD.c_str(),0.f,0.f,40,RED);
+		DrawText(resultD.c_str(),pos.x+100.f,pos.y+150.f,40,RED);
 
-		std::map<HeroState, std::string> heroStates = {
-
-			{HeroState::idle, "idle"},
-			{HeroState::walk, "running"},
-			{HeroState::jumping, "jumping"},
-			{HeroState::shot, "shot"}
-
-
-		};
-
-		std::string outState = "current state: ";
-
-		outState += heroStates[state];
-
-
-
-//		outState.append(std::to_string())
-
-//		DrawText(outState.c_str(),0.f,20.f,40,RED);
 
 
 
@@ -175,12 +155,33 @@ namespace dominion {
 	}
 
 	void  Hero::render(){
+		std::map<HeroState, std::string> heroStates = {
+
+			{HeroState::idle, "idle"},
+			{HeroState::walk, "running"},
+			{HeroState::jumping, "jumping"},
+			{HeroState::shot, "shot"}
+
+
+		};
+
+		std::string outState = "current state: ";
+
+		outState += heroStates[state];
+
+
+
+		//outState.append(std::to_string());
+
+		DrawText(outState.c_str(),0.f,0.f,40,RED);
+	
+
 
 		frameRect.width = width * leftRight;
 		Rectangle dest{pos.x, pos.y,drawWidth, drawWidth};
 		DrawTexturePro(*texture,frameRect,dest,Vector2{},0.f,WHITE);
-		DrawRectangleLinesEx(dest,2.f,RED);
-		DrawRectangleLinesEx(getBounds(), 2.f, RED);
+//		DrawRectangleLinesEx(dest,2.f,RED);
+//		DrawRectangleLinesEx(getBounds(), 2.f, RED);
 //
 //
 		for(const auto& b : bullets){
@@ -232,6 +233,8 @@ namespace dominion {
 				vel.y   = 0.f;
 			}
 		}
+
+		std::cout << pos.x << pos.y << '\n';
 
 
 	}
