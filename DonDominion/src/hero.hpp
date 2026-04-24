@@ -6,19 +6,27 @@
 
 namespace dominion {
 
+	struct Bullet {
+		Vector2 pos;
+		Vector2 vel;
+		bool active;
+	};
 
+	enum class HeroState {idle,walk,jumping, running, shot};
 	class Hero {
 		public:
 			Hero();
 			~Hero();
 
 			void render();
-			void makeAnimation();
+			void makeAnimation(float deltaTime);
 			void updatePlayer(Map& map);
+			void updateMovement(float deltaTime);
 
 			
 			Vector2 getCenter();
-		    Rectangle getBounds();
+		    Rectangle getBounds() const;
+			Vector2 pos,vel, prev;
 
 
 
@@ -26,15 +34,29 @@ namespace dominion {
 
 		private:
 			//Animation anim{};
-			Texture2D* texture{&getTexture("IDLE")};
-			Vector2 pos,vel, prev;
+			Texture2D* texture{&getTexture("hero")};
 			Rectangle frameRect{};
 			float width{};
 			float height{};
+
+			float drawWidth{};
+			float drawHeight{};
+			float collisionWidth{};   // tighter box for actual collision
+			float collisionHeight{};
 			int  maxFrames{};
 			int frame{};
 			float runningTime{};
-			float updateTime{1/18.f};
+			float updateTime{1/12.f};
+			bool onGround = false;
+
+			void applyGravity();
+			void resolveCollision(Map& map);
+			void updateBullets(float deltaTime);
+			HeroState state;
+			float leftRight{-1.f};
+			std::vector<Bullet> bullets;
+			float bulletSpeed{};
+
 
 
 	};

@@ -27,7 +27,10 @@ namespace dominion {
 		private:
 			Map map;
 			Hero hero;
-			Camera2D camera{};
+			Camera2D camera{0};
+
+		   const Texture &backGround{getTexture("back")};
+		   const Texture &foreGround{getTexture("ground")};
 
 	};
 

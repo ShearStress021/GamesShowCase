@@ -1,6 +1,6 @@
 #include "gameScene.hpp"
 #include "random.hpp"
-
+#include "background.hpp"
 
 
 
@@ -8,16 +8,20 @@ namespace dominion {
 
 	static int index = 0;
 
+
 	static const char* blockMap[] {
-		"grass", "panel","dirt", "ground", "brick"
+		"air","grass", "panel","dirt", "ground", "brick"
 	};
+	static int size = 6;
 
 
 	GameScene::GameScene() {
 
+
 		camera.zoom = 1.f;
-		camera.target = hero.getCenter();
+		camera.target = hero.pos;
 		camera.offset = getScreenCenter();
+		camera.rotation = 0.0f;
 
 	}
 	GameScene::~GameScene() {
@@ -25,13 +29,14 @@ namespace dominion {
 	}
 
 	void GameScene::render() {
+	 drawBackGround(backGround, foreGround, 0.0001f, 0.0002f, 0.002f);
 		BeginMode2D(camera);
 
-		map.render(camera);
+		map.render();
 		hero.render();
 		EndMode2D();
 
-		drawTexture(getTexture(blockMap[index]), {GetScreenWidth() - 75.f, GetScreenHeight() - 75.f}, {50.f, 50.f}, 0.f,WHITE);
+	//	drawTexture(getTexture(blockMap[index]), {GetScreenWidth() - 75.f, GetScreenHeight() - 75.f}, {50.f, 50.f}, 0.f,WHITE);
 		
 	}
 
@@ -48,39 +53,32 @@ namespace dominion {
 
 	void GameScene::update() {
 		updateControls();
-		updateEnviroment();
+//		updateEnviroment();
 	}
 
 	void GameScene::updateControls(){
 		hero.updatePlayer(map);
 
-		camera.target = lerp(camera.target, hero.getCenter(), 25.f*GetFrameTime());
+		camera.target = hero.pos;
+			// 2. Clamp the Camera X
+		// Don't let the camera look further left than half a screen width
+		float minX = camera.offset.x / camera.zoom;
+		if (camera.target.x < minX) {
+			camera.target.x = minX;
+		}
+
+		// Optional: Clamp the Camera Y to keep the ground at the bottom
+		// This prevents the camera from "looking down" into the void below the dirt
+		float maxY = (MAP_ROWS * TILE_SIZE) - (camera.offset.y / camera.zoom);
+		if (camera.target.y > maxY) {
+			camera.target.y = maxY;
+		}
+
+
 
 	
 
 	}
-	void GameScene::updateEnviroment(){
 
-		for (int y = map.sizeY -1;y >= 0; --y){
-			for(int x = map.sizeX -1; x >= 0; --x){
-				auto& block = map[y][x];
-				
-				if(block.type == Block::grass) {
-					if(map[y][x].value2 == 0){
-						map[y][x].value2 = random(100, 255);
-						
-					}
-					++map[y][x].value;
-					if (map[y][x].value >= map[y][x].value2){
-						map[y][x].value = 0;
-						map.setBlock(x,y,"dirt");
-					}
-				}
-
-
-			}
-		}
-	}
 
 }
-

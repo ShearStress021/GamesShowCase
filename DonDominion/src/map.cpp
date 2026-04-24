@@ -4,120 +4,107 @@
 #include "resourceManager.hpp"
 #include "utils.hpp"
 #include "background.hpp"
+#include <iostream>
 
 
 
 
 namespace dominion {
-	constexpr Block::id_t idCount = 5;	
+
+	static const char* blockTexture(BlockType type){
+		switch(type){
+			case BlockType::grass: return "grass";
+			case BlockType::dirt: return "dirt";
+			case BlockType::brick: return "brick";
+			case BlockType::panel: return "panel";
+			case BlockType::ground: return "ground";
+			case BlockType::floor: return "floor";
+			default:              return nullptr;
 
 
-
-	static std::unordered_map<std::string, Block::id_t> blockIds {
-		{"grass", 0}, {"panel", 1}, {"ground", 2}, {"dirt", 3}, {"brick", 4}
-	};
-
-
-
-	static std::unordered_map<Block::id_t, std::string> blockNames {
-		{0, "grass"}, {1, "panel"}, {2, "ground"}, {3, "dirt"}, {4, "brick"}
-
-	};
-
-	constexpr static std::array<Block::Type, idCount> blockTypes {{
-		Block::grass, Block::panel,Block::ground , Block::dirt, Block::brick
-
-	}};
-
-
-	void Map::init(){
-		blocks = std::vector<std::vector<Block>>(sizeY, std::vector<Block>(sizeX, Block{}));
-	}
-
-
-	void Map::setBlock(int x, int y,const std::string& name) 
-	{
-
-		auto &block = blocks[y][x];
-		block.id = blockIds[name];
-		block.value = block.value2 = 0;
-		block.type = blockTypes[block.id];
-
-		if (block.id != 0){
-			block.tex = &getTexture(name);
 		}
-
-	}
-
-	void Map::setBlock(int x, int y, Block::id_t id) {
-		auto &block = blocks[y][x];
-		block.id = id;
-		block.type = blockTypes[block.id];
-
-		if (block.id != 0){
-			block.tex = &getTexture(blockNames[id]);
-		}
-
-
-	}
-
-	void Map::deleteBlock(int x, int y) {
-		auto& block = blocks[y][x];
-		block.tex = nullptr;
-		block.type = Block::grass;
-		block.id = block.value = block.value2 = 0;
-
 	}
 
 
-	bool Map::isPositionValid(int x, int y) {
-		return x >= 0 and x < sizeX and y >= 0 and y < sizeY;
+	Map::Map(){
+		blocks.assign(MAP_ROWS, std::vector<Block>(MAP_COLS, Block{}));
+		generate();
 	}
 
 
-	bool Map::is(int x, int y, Block::Type type){
-		return isPositionValid(x, y) and blocks[y][x].type == type;
+	void Map::setBlock(int col, int row, BlockType type){
+		if (col < 0 || col >= MAP_COLS) return;
+        if (row < 0 || row >= MAP_ROWS) return;
+
+        auto& b  = blocks[row][col];
+        b.type   = type;
+
+        const char* name = blockTexture(type);
+        b.tex = (name != nullptr) ? &getTexture(name) : nullptr;
 	}
 
+	void Map::generate(){
+		// ground level row (0 = top, MAP_ROWS-1 = bottom)
+        const int groundLevel = 14; 
 
-	std::vector<Block>& Map::operator[](size_t index) {
-		return blocks[index];
-	}
-
-	void Map::render(Camera2D& camera){
-		drawBackGround(backGround,foreGround,0.001f, 0.002f,0.2f);
-		
-		auto bounds = getCameraBound(camera);
-
-		auto minX = std::max(0, int(bounds.x));
-		auto minY = std::max(0, int(bounds.y));
-		auto maxX = std::min(sizeX, int(bounds.x + bounds.width) +1);
-		auto maxY = std::min(sizeY, int(bounds.y + bounds.height) +1);
-
-		for(int y = minY; y < maxY; ++y){
-			for(int x = minX; x < maxX; ++x ){
-				auto& block = blocks[y][x];
-
-				if (block.type == Block::grass)
-				{
-					continue;
+        for (int col = 0; col < MAP_COLS; col++) {
+			for(int row = 0; row < MAP_ROWS; row++){
+				if (row < groundLevel) {
+					setBlock(col, row, BlockType::air);
+				} else if (row == groundLevel) {
+					setBlock(col, row, BlockType::floor); // The surface
+				} else {
+					setBlock(col, row, BlockType::dirt);  // Fill everything below
 				}
 
-				int ox = x;
-				while(x < maxX and blocks[y][x].id == block.id){
-					++x;
-				}
+		    if (col % 12 == 3) {
+                int platformRow = groundLevel - 1;
+                for (int pc = col; pc < col + 4 && pc < MAP_COLS; pc++) {
+        //            setBlock(pc, platformRow, BlockType::panel); 
+				} 
+			  } 
+			} 
+		} 
+	} 
+    bool Map::isSolid(int col, int row) const { 
+	  if (col < 0 || col >= MAP_COLS || row < 0 || row >= MAP_ROWS) return true; // Bounds check 
+	  return blocks[row][col].type != BlockType::air;
+	}
 
-				if (camera.zoom <= 12.5f){
-					DrawRectangle(ox, y,ox-x,1,GREEN);
-				}else {
-					drawTextureBlock(*block.tex, {(float)ox, (float)y, float(x - ox), 1.f});
-				}
-			}
+    bool Map::isSolidAtWorld(float worldX, float worldY) const{
 
+//		float mapTopY = screenH - (MAP_ROWS * TILE_SIZE);
+		int col = (int)(worldX / TILE_SIZE);
+		int row = (int)((worldY )/ TILE_SIZE);
+		return isSolid(col, row);
+	}
 
-		 }
-		
+	Rectangle Map::getTileRect(int col, int row) const {
+		return { col * TILE_SIZE * 1.f, row * TILE_SIZE * 1.f,
+				 TILE_SIZE * 1.f,       TILE_SIZE * 1.f };
+	}
+
+	void Map::drawTile(int col, int row) const {
+
+		const auto& b = blocks[row][col];
+        if (b.type == BlockType::air || b.tex == nullptr) return;
+
+//        float height = GetScreenHeight();
+
+        float x = col * TILE_SIZE;
+        float y =   row * TILE_SIZE;
+
+        Rectangle src  { 0.f, 0.f, (float)b.tex->width, (float)b.tex->height };
+        Rectangle dest { x,   y,   (float)TILE_SIZE,     (float)TILE_SIZE     };
+
+        DrawTexturePro(*b.tex, src, dest, Vector2{}, 0.f, WHITE);
+
+	}
+
+	void Map::render() {
+		  for (int row = 0; row < MAP_ROWS; row++)
+            for (int col = 0; col < MAP_COLS; col++)
+                drawTile(col, row);
 	}
 }
 
