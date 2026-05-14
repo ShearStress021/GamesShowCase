@@ -1,6 +1,8 @@
+#include <iostream>
 #include "raylib.h"
 #include <random>
 #include <vector>
+#include <raymath.h>
 
 static int PEBBLE_NUM{30};
 
@@ -8,9 +10,6 @@ struct Pebble {
 	Vector2 position{};
 	Color color{};
 
-	void draw(){
-		DrawCircle(position.x+30, position.y+10,10.f,PURPLE) ;
-	}
 
 };
 
@@ -27,7 +26,7 @@ struct Container {
 
 			for(size_t i{}; i < PEBBLE_NUM; i++){
 				Pebble pebble{};
-				pebble.position = Vector2{random_range(points[0].x, points[3].x), random_range(points[0].y, points[1].y)};
+				pebble.position = Vector2{random_range(points[0].x + 2, points[3].x - 2), random_range(points[0].y+2, points[1].y-2)};
 				pebbles.push_back(pebble);
 			}
 
@@ -35,7 +34,6 @@ struct Container {
 		void draw(){
 			drawPebble();
 
-			update();
 			DrawSplineLinear(points,4,thickness,RED);
 			DrawCircleV(points[0], radius, RED); // Left rim
 			DrawCircleV(points[3], radius, RED);
@@ -52,28 +50,72 @@ struct Container {
 		}
 
 
-		void update(){
+		void update(float deltaTime){
 			Vector2 mousePoint{GetMousePosition()};
+
+			float targetRotation{};
+			float rotation{};
+
+			Vector2 pivot{325.f, 350.f};
+			Vector2 displayPoints[4]{};
+			size_t i{};
+			for(const auto& point: points){
+				displayPoints[i] = point;
+				i++;
+			}
+
 
 			if(CheckCollisionPointRec(mousePoint, glassHitBox)){
 				if(IsMouseButtonPressed(MOUSE_RIGHT_BUTTON)){
-					points[0] = {250, 305};
-					points[1] =  {320,405};
-					points[2] = {400,350};
-					points[3] = {300,305};
-					
+					targetRotation+=35.f;
 				}
 			}
+
+			rotation = Lerp(rotation, targetRotation, 8.f * deltaTime);
+
+
+			if(rotation != 0) {
+				for(size_t i{}; i < 4; i++){
+					Vector2 translated = Vector2Subtract(displayPoints[i], pivot);
+
+					Vector2 rotated = Vector2Rotate(translated, -rotation * DEG2RAD);
+
+					points[i] = Vector2Add(rotated, pivot);
+
+					std::cout << points[i].x  << "  " << points[i].y << '\n';
+				}
+			}
+
+			std::vector<Vector2> getGlassPosition() const{
+				Vector2 staticPoints[4] = {
+					{300.f, 300.f},
+					{300.f, 400.f},
+					{350.f, 400.f},
+					{350.f, 300.f}
+				};
+
+				for (auto& pnt: staticPoints){
+					points.push_back(pnt);
+				}
+
+
+				return points;
+			}
+			
+
+
+
 		}
 
 	private:
 		Vector2 position{};
-		Vector2 points[4] = {
-			{300.f, 300.f},
-			{300.f, 400.f},
-			{350.f, 400.f},
-			{350.f, 300.f}
-		};
+		std::vector<Vector2> points{};
+//		Vector2 points[4] = {
+//			{300.f, 300.f},
+//			{300.f, 400.f},
+//			{350.f, 400.f},
+//			{350.f, 300.f}
+//		};
 
 		float thickness = 2.0f;
 		float radius = thickness / 2.0f;
@@ -106,6 +148,7 @@ int main(void)
         BeginDrawing();
             ClearBackground(BLACK);
 			glass.draw();
+//			glass.update(GetFrameTime());
 			DrawCircle(60.f,60.f,20.f,RED);
         EndDrawing();
     }
