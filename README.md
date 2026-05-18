@@ -13,7 +13,7 @@ Each game lives in its own directory and can be built and run independently.
 |-----|--------|--------|-------------|
 | `armageddonClash` | raylib | 🧪 Prototype | Short description |
 | `don Dominion` | raylib | 🚧 In Progress | Short description |
-| `game-name-3` | raylib | 🧪 Prototype | Short description |
+| `pebble sort` | raylib | 🧪 Prototype | Short description |
 
 > This list will grow as more games are added.
 
