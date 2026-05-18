@@ -39,6 +39,7 @@ struct Glass {
 	float currentRotation{};
 	float targetOffsetX{};
 	float currentOffsetX{};
+	bool isPoured{false};
 
 };
 
@@ -85,7 +86,16 @@ class Containers {
 				if(CheckCollisionPointRec(mouseHitPoint, glassHitBoxs[i])){
 					if(IsMouseButtonPressed(MOUSE_RIGHT_BUTTON)){
 
-						if(selectedIdx == -1){
+						if(g.isPoured){
+
+							g.targetOffsetX = 0.f;
+							g.targetOffsetY = 0.f;
+							g.targetRotation = 0.f;
+							g.isPoured = false;
+
+						}
+
+						else if(selectedIdx == -1){
 							selectedIdx = (int)i;
 							g.targetOffsetY = -30.f;
 
@@ -106,6 +116,7 @@ class Containers {
 							sel.targetOffsetY = g.basePoints[0].y - sel.basePoints[0].y - 70.f;
 
 							sel.targetRotation = -80.f;
+							sel.isPoured = true;
 							selectedIdx = -1;
 
 						}
@@ -125,7 +136,7 @@ class Containers {
 				float deltaRot = g.currentRotation - prevRot;
 				float deltaX = g.currentOffsetX - prevX;
 				
-				Vector2 pivot {g.points[0].x + 25.f + g.currentOffsetX, g.points[0].y + g.currentOffsetY};
+				Vector2 pivot {g.basePoints[0].x + 35.f + g.currentOffsetX, g.basePoints[0].y + 23.f + g.currentOffsetY};
 		//		for(size_t j{}; j < g.basePoints.size(); j++){
 				for(auto& p : g.points){
 				//	Vector2 p = g.points[j];
@@ -134,13 +145,15 @@ class Containers {
 					Vector2 translated = Vector2Subtract(p, pivot);
 					Vector2 rotate = Vector2Rotate(translated, deltaRot* DEG2RAD);
 					p = Vector2Add(rotate, pivot);
+			//		glassHitBoxs[i].y = p.x;
 
 
 				}
 
-				glassHitBoxs[i].y = g.basePoints[0].y + g.currentOffsetY;
-				glassHitBoxs[i].x = g.basePoints[0].x + g.currentOffsetX;
+				glassHitBoxs[i].y =  pivot.y ;
+				glassHitBoxs[i].x = pivot.x - 35.f;
 				
+//				DrawRectangleLines(glassHitBoxs[i].x, glassHitBoxs[i].y,glassHitBoxs[i].width, glassHitBoxs[i].height,BLUE);
 
 
 			}
