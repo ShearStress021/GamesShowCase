@@ -37,106 +37,129 @@ struct Glass {
 	float currentOffsetY{};
 	float targetRotation{};
 	float currentRotation{};
+	float targetOffsetX{};
+	float currentOffsetX{};
 
 };
 
-struct Containers {
+class Containers {
 
-	Containers(){
-		for(size_t i{}; i < 5 ; i ++){
-			Glass glass{};
-			glass.basePoints=  {
-				{220.f + (i * 80.f), 300.f },
-				{220.f + (i * 80.f), 400.f },
-				{270.f + (i * 80.f), 400.f },
-				{270.f + (i * 80.f), 300.f }
+	public:
+		Containers(){
+			for(size_t i{}; i < 5 ; i ++){
+				Glass glass{};
+				glass.basePoints=  {
+					{220.f + (i * 80.f), 300.f },
+					{220.f + (i * 80.f), 400.f },
+					{270.f + (i * 80.f), 400.f },
+					{270.f + (i * 80.f), 300.f }
 
 
-			};
-			glass.points =  glass.basePoints;
-			Rectangle glassHit{glass.points[0].x, glass.points[0].y,50.f, 100.f };
-			glassHitBoxs.push_back(glassHit);
-			glasses.push_back(glass);
-			
+				};
+				glass.points =  glass.basePoints;
+				Rectangle glassHit{glass.points[0].x, glass.points[0].y,50.f, 100.f };
+				glassHitBoxs.push_back(glassHit);
+				glasses.push_back(glass);
+				
 
+			}
 		}
-	}
 
 
-	void draw(){
-		for(const auto& glass: glasses){
-			DrawSplineLinear(glass.points.data(),glass.points.size(),glass.thickness,RED);
-			DrawCircleV(glass.points[0], glass.radius, RED); 
-			DrawCircleV(glass.points[3], glass.radius, RED);
+		void draw(){
+			for(const auto& glass: glasses){
+				DrawSplineLinear(glass.points.data(),glass.points.size(),glass.thickness,RED);
+				DrawCircleV(glass.points[0], glass.radius, RED); 
+				DrawCircleV(glass.points[3], glass.radius, RED);
 
+			}
 		}
-	}
 
-	void update(float deltaTime){
+		void update(float deltaTime){
 
-		Vector2 mouseHitPoint{GetMousePosition()};
+			Vector2 mouseHitPoint{GetMousePosition()};
 
-		for(size_t i{}; i < glasses.size(); i++){
+			for(size_t i{}; i < glasses.size(); i++){
 
-			auto& g = glasses[i];
-			if(CheckCollisionPointRec(mouseHitPoint, glassHitBoxs[i])){
-				if(IsMouseButtonPressed(MOUSE_RIGHT_BUTTON)){
+				auto& g = glasses[i];
+				if(CheckCollisionPointRec(mouseHitPoint, glassHitBoxs[i])){
+					if(IsMouseButtonPressed(MOUSE_RIGHT_BUTTON)){
 
-					g.targetOffsetY = (g.targetOffsetY == 0.0f) ? -50.f : 0.0f;
-					g.targetRotation = (g.targetRotation == 0.0f) ? -80.f : 0.0f;
-					
+						if(selectedIdx == -1){
+							selectedIdx = (int)i;
+							g.targetOffsetY = -30.f;
+
+						}
+						else if(selectedIdx == (int)i){
+							g.targetOffsetY = 0.f;
+							g.targetRotation = 0.f;
+							selectedIdx = -1;
+
+						}
+						else {
+							auto& sel = glasses[selectedIdx];
+
+							float targetCenterX = g.basePoints[0].x + 50.f;
+							float selCenterX = sel.basePoints[0].x + 50.f;
+
+							sel.targetOffsetX = targetCenterX - selCenterX;
+							sel.targetOffsetY = g.basePoints[0].y - sel.basePoints[0].y - 70.f;
+
+							sel.targetRotation = -80.f;
+							selectedIdx = -1;
+
+						}
+					}
 				}
+
+				float prev = g.currentOffsetY;
+				float prevRot = g.currentRotation;
+				float prevX = g.currentOffsetX;
+
+				g.currentOffsetX +=(g.targetOffsetX - g.currentOffsetX) * 8.f * deltaTime;
+				g.currentOffsetY += (g.targetOffsetY - g.currentOffsetY)* 8.f * deltaTime;
+				g.currentRotation+= (g.targetRotation - g.currentRotation) * 8.f * deltaTime;
+
+
+				float delta = g.currentOffsetY - prev;
+				float deltaRot = g.currentRotation - prevRot;
+				float deltaX = g.currentOffsetX - prevX;
+				
+				Vector2 pivot {g.points[0].x + 25.f + g.currentOffsetX, g.points[0].y + g.currentOffsetY};
+		//		for(size_t j{}; j < g.basePoints.size(); j++){
+				for(auto& p : g.points){
+				//	Vector2 p = g.points[j];
+					p.y += delta;
+					p.x += deltaX;
+					Vector2 translated = Vector2Subtract(p, pivot);
+					Vector2 rotate = Vector2Rotate(translated, deltaRot* DEG2RAD);
+					p = Vector2Add(rotate, pivot);
+
+
+				}
+
+				glassHitBoxs[i].y = g.basePoints[0].y + g.currentOffsetY;
+				glassHitBoxs[i].x = g.basePoints[0].x + g.currentOffsetX;
+				
+
+
 			}
-
-			float prev = g.currentOffsetY;
-			float prevRot = g.currentRotation;
-
-			g.currentOffsetY += (g.targetOffsetY - g.currentOffsetY)* 8.f * deltaTime;
-			g.currentRotation+= (g.targetRotation - g.currentRotation) * 8.f * deltaTime;
-
-
-			float delta = g.currentOffsetY - prev;
-			float deltaRot = g.currentRotation - prevRot;
-			
-			Vector2 pivot {g.points[0].x + 25, g.points[0].y + 50.f};
-	//		for(size_t j{}; j < g.basePoints.size(); j++){
-			for(auto& p : g.points){
-			//	Vector2 p = g.points[j];
-				p.y += delta;
-				Vector2 translated = Vector2Subtract(p, pivot);
-				Vector2 rotate = Vector2Rotate(translated, deltaRot* DEG2RAD);
-				p = Vector2Add(rotate, pivot);
-
-
-			}
-
-			glassHitBoxs[i].y = g.basePoints[0].y + g.currentOffsetY;
-
 
 		}
-
-	}
-
-	std::vector<Glass> glasses{};
-	std::vector<Rectangle> glassHitBoxs{};
-
-
-
+	private:
+		std::vector<Glass> glasses{};
+		std::vector<Rectangle> glassHitBoxs{};
+		int selectedIdx{-1};
 
 };
 int main(void)
 {
     InitWindow(920, 720, "raylib example - basic window");
 
-
-
-
 	Containers container{};
 
-
-
-
 	SetTargetFPS(60);
+
     while (!WindowShouldClose())
     {
         BeginDrawing();
