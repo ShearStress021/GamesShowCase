@@ -20,134 +20,165 @@ float random_range(float min, float max){
 }
 
 
-struct Container {
-	public:
-		Container (){
+struct Glass {
+	Glass () {
 
-			for(size_t i{}; i < PEBBLE_NUM; i++){
-				Pebble pebble{};
-				pebble.position = Vector2{random_range(points[0].x + 2, points[3].x - 2), random_range(points[0].y+2, points[1].y-2)};
-				pebbles.push_back(pebble);
-			}
+	}
+	std::vector<Vector2> getPointPosition(){
+		return points;
+	}
 
-		}
-		void draw(){
-			drawPebble();
+	std::vector<Vector2> points{};
+	std::vector<Vector2> basePoints{};
 
-			DrawSplineLinear(points,4,thickness,RED);
-			DrawCircleV(points[0], radius, RED); // Left rim
-			DrawCircleV(points[3], radius, RED);
-
-
-		}
-
-		void drawPebble(){
-
-			for(const auto& pebble: pebbles){
-				DrawCircle(pebble.position.x, pebble.position.y,5.f,PURPLE);
-			}
-
-		}
-
-
-		void update(float deltaTime){
-			Vector2 mousePoint{GetMousePosition()};
-
-			float targetRotation{};
-			float rotation{};
-
-			Vector2 pivot{325.f, 350.f};
-			Vector2 displayPoints[4]{};
-			size_t i{};
-			for(const auto& point: points){
-				displayPoints[i] = point;
-				i++;
-			}
-
-
-			if(CheckCollisionPointRec(mousePoint, glassHitBox)){
-				if(IsMouseButtonPressed(MOUSE_RIGHT_BUTTON)){
-					targetRotation+=35.f;
-				}
-			}
-
-			rotation = Lerp(rotation, targetRotation, 8.f * deltaTime);
-
-
-			if(rotation != 0) {
-				for(size_t i{}; i < 4; i++){
-					Vector2 translated = Vector2Subtract(displayPoints[i], pivot);
-
-					Vector2 rotated = Vector2Rotate(translated, -rotation * DEG2RAD);
-
-					points[i] = Vector2Add(rotated, pivot);
-
-					std::cout << points[i].x  << "  " << points[i].y << '\n';
-				}
-			}
-
-			std::vector<Vector2> getGlassPosition() const{
-				Vector2 staticPoints[4] = {
-					{300.f, 300.f},
-					{300.f, 400.f},
-					{350.f, 400.f},
-					{350.f, 300.f}
-				};
-
-				for (auto& pnt: staticPoints){
-					points.push_back(pnt);
-				}
-
-
-				return points;
-			}
-			
-
-
-
-		}
-
-	private:
-		Vector2 position{};
-		std::vector<Vector2> points{};
-//		Vector2 points[4] = {
-//			{300.f, 300.f},
-//			{300.f, 400.f},
-//			{350.f, 400.f},
-//			{350.f, 300.f}
-//		};
-
-		float thickness = 2.0f;
-		float radius = thickness / 2.0f;
-		Rectangle glassHitBox{300.f, 300.f, 50.f,100.f};
-		std::vector<Pebble> pebbles{};
-		Pebble p{};
-
-
+	float thickness = 2.0f;
+	float radius = thickness / 2.0f;
+	float targetOffsetY{};
+	float currentOffsetY{};
+	float targetRotation{};
+	float currentRotation{};
+	float targetOffsetX{};
+	float currentOffsetX{};
+	bool isPoured{false};
 
 };
 
+class Containers {
+
+	public:
+		Containers(){
+			for(size_t i{}; i < 5 ; i ++){
+				Glass glass{};
+				glass.basePoints=  {
+					{220.f + (i * 80.f), 300.f },
+					{220.f + (i * 80.f), 400.f },
+					{270.f + (i * 80.f), 400.f },
+					{270.f + (i * 80.f), 300.f }
+
+
+				};
+				glass.points =  glass.basePoints;
+				Rectangle glassHit{glass.points[0].x, glass.points[0].y,50.f, 100.f };
+				glassHitBoxs.push_back(glassHit);
+				glasses.push_back(glass);
+				
+
+			}
+		}
+
+
+		void draw(){
+			for(const auto& glass: glasses){
+				DrawSplineLinear(glass.points.data(),glass.points.size(),glass.thickness,RED);
+				DrawCircleV(glass.points[0], glass.radius, RED); 
+				DrawCircleV(glass.points[3], glass.radius, RED);
+
+			}
+		}
+
+		void update(float deltaTime){
+
+			Vector2 mouseHitPoint{GetMousePosition()};
+
+			for(size_t i{}; i < glasses.size(); i++){
+
+				auto& g = glasses[i];
+				if(CheckCollisionPointRec(mouseHitPoint, glassHitBoxs[i])){
+					if(IsMouseButtonPressed(MOUSE_RIGHT_BUTTON)){
+
+						if(g.isPoured){
+
+							g.targetOffsetX = 0.f;
+							g.targetOffsetY = 0.f;
+							g.targetRotation = 0.f;
+							g.isPoured = false;
+
+						}
+
+						else if(selectedIdx == -1){
+							selectedIdx = (int)i;
+							g.targetOffsetY = -30.f;
+
+						}
+						else if(selectedIdx == (int)i){
+							g.targetOffsetY = 0.f;
+							g.targetRotation = 0.f;
+							selectedIdx = -1;
+
+						}
+						else {
+							auto& sel = glasses[selectedIdx];
+
+							float targetCenterX = g.basePoints[0].x + 50.f;
+							float selCenterX = sel.basePoints[0].x + 50.f;
+
+							sel.targetOffsetX = targetCenterX - selCenterX;
+							sel.targetOffsetY = g.basePoints[0].y - sel.basePoints[0].y - 70.f;
+
+							sel.targetRotation = -80.f;
+							sel.isPoured = true;
+							selectedIdx = -1;
+
+						}
+					}
+				}
+
+				float prev = g.currentOffsetY;
+				float prevRot = g.currentRotation;
+				float prevX = g.currentOffsetX;
+
+				g.currentOffsetX +=(g.targetOffsetX - g.currentOffsetX) * 8.f * deltaTime;
+				g.currentOffsetY += (g.targetOffsetY - g.currentOffsetY)* 8.f * deltaTime;
+				g.currentRotation+= (g.targetRotation - g.currentRotation) * 8.f * deltaTime;
+
+
+				float delta = g.currentOffsetY - prev;
+				float deltaRot = g.currentRotation - prevRot;
+				float deltaX = g.currentOffsetX - prevX;
+				
+				Vector2 pivot {g.basePoints[0].x + 35.f + g.currentOffsetX, g.basePoints[0].y + 23.f + g.currentOffsetY};
+		//		for(size_t j{}; j < g.basePoints.size(); j++){
+				for(auto& p : g.points){
+				//	Vector2 p = g.points[j];
+					p.y += delta;
+					p.x += deltaX;
+					Vector2 translated = Vector2Subtract(p, pivot);
+					Vector2 rotate = Vector2Rotate(translated, deltaRot* DEG2RAD);
+					p = Vector2Add(rotate, pivot);
+			//		glassHitBoxs[i].y = p.x;
+
+
+				}
+
+				glassHitBoxs[i].y =  pivot.y ;
+				glassHitBoxs[i].x = pivot.x - 35.f;
+				
+//				DrawRectangleLines(glassHitBoxs[i].x, glassHitBoxs[i].y,glassHitBoxs[i].width, glassHitBoxs[i].height,BLUE);
+
+
+			}
+
+		}
+	private:
+		std::vector<Glass> glasses{};
+		std::vector<Rectangle> glassHitBoxs{};
+		int selectedIdx{-1};
+
+};
 int main(void)
 {
     InitWindow(920, 720, "raylib example - basic window");
 
-
-	Rectangle aglass{300.f, 150.f, 40.f,70.f};
-	Rectangle bglass{400.f, 300.f, 40.f,70.f};
-
-
-
-	Container glass{};
-
-
-
+	Containers container{};
 
 	SetTargetFPS(60);
+
     while (!WindowShouldClose())
     {
         BeginDrawing();
             ClearBackground(BLACK);
-			glass.draw();
+			container.draw();
+			container.update(GetFrameTime());
 //			glass.update(GetFrameTime());
 			DrawCircle(60.f,60.f,20.f,RED);
         EndDrawing();
