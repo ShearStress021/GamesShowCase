@@ -56,7 +56,7 @@ void Container::update(float deltaTime) {
 		auto& glassRec = glass.bound;
 
 		if (CheckCollisionPointRec(mouseHitPoint, glassRec)) {
-			if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON)) {
+			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 
 				if (glass.isPoured) {
 					glass.targetOffsetX = 0.f;
@@ -81,14 +81,23 @@ void Container::update(float deltaTime) {
 					auto& sel = glasses[selectedIdx];
 					auto& selected = sel.bound;
 
+					float sourceBottom = selected.y + selected.height;
+					float targetTop = glassRec.y;
 
-					float targetCenterX = glassRec.x + 50.f;
-					float selCenterX = selected.x + 50.f;
+					float targetCenterX = glassRec.x + glassRec.width / 2;
+					float selCenterX = selected.x + selected.width / 2;
 
-					sel.targetOffsetX = targetCenterX - selCenterX;
-					sel.targetOffsetY = glassRec.y - selected.y - 70.f;
 
-					sel.targetRotation = -70.f;
+					bool pourRight = targetCenterX > selCenterX;
+
+
+
+
+					sel.targetOffsetX = targetCenterX - selCenterX + (sel.bound.width + 10.f);
+					sel.targetOffsetY = targetTop - sourceBottom - 10.f;
+
+
+					sel.targetRotation = pourRight ? 70.f : -70.f;
 
 					sel.isPoured = true;
 					selectedIdx = -1;
