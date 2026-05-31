@@ -19,14 +19,14 @@ struct Pebble {
 };
 
 struct Glass {
-	Vector2 points{};
+	//Vector2 points{};
+	Rectangle bound{};
 	float radius{ 1.f };
 	float thickness{ 2.f };
 	float targetOffsetX{};
 	float currentOffsetX{};
 	float targetOffsetY{};
 	float currentOffsetY{};
-
 	float currentRotation{};
 	float targetRotation{};
 	bool isPoured{ false };

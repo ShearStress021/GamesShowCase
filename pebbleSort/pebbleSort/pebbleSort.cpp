@@ -10,36 +10,26 @@
 Container::Container() {
 	for (int i{}; i < 5; i++) {
 		Glass glass{};
-		glass.points = {
-			220.f + (i * 80.f), 300.f
-		};
-
-
-
-
-		Rectangle rec{
-			glass.points.x,
-			glass.points.y,
+		glass.bound = {
+			220.f + (i * 80.f), 300.f,
 			50.f,
 			110.f
 		};
-
-		glassesRec.push_back(rec);
+	//	glassesRec.push_back(rec);
 		glasses.push_back(glass);
 	}
 
 }
 
 void Container::draw() {
-	for (size_t i{}; i < glassesRec.size(); i++) {
+	for (auto &glass : glasses) {
 		//			DrawSplineLinear(glass.points.data(), glass.points.size(), glass.thickness, RED);
 		//			DrawCircleV(glass.points[0], glass.radius, RED);
 		//			DrawCircleV(glass.points[3], glass.radius, RED);
 
 
 				//	DrawRectangleRounded(rec, 0.3f, 8, Color { 180, 200, 240, 60 });
-		auto& rec = glassesRec[i];
-		auto& glass = glasses[i];
+		auto& rec = glass.bound;
 		rlPushMatrix();
 		Vector2 pivot{ rec.x + rec.width / 2, rec.y + rec.height / 2 };
 		rlTranslatef(pivot.x, pivot.y, 0);
@@ -61,9 +51,9 @@ void Container::draw() {
 void Container::update(float deltaTime) {
 	Vector2 mouseHitPoint{ GetMousePosition() };
 
-	for (size_t i{}; i < glasses.size(); i++) {
-		auto& glass = glasses[i];
-		auto& glassRec = glassesRec[i];
+	int i{};
+	for (auto &glass: glasses) {
+		auto& glassRec = glass.bound;
 
 		if (CheckCollisionPointRec(mouseHitPoint, glassRec)) {
 			if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON)) {
@@ -89,8 +79,7 @@ void Container::update(float deltaTime) {
 				else {
 
 					auto& sel = glasses[selectedIdx];
-					auto& selected = glassesRec[selectedIdx];
-
+					auto& selected = sel.bound;
 
 
 					float targetCenterX = glassRec.x + 50.f;
@@ -112,6 +101,8 @@ void Container::update(float deltaTime) {
 			}
 
 
+
+		}
 			float prevY = glass.currentOffsetY;
 			float prevX = glass.currentOffsetX;
 
@@ -121,19 +112,15 @@ void Container::update(float deltaTime) {
 			float deltaY = glass.currentOffsetY - prevY;
 			float deltaX = glass.currentOffsetX - prevX;
 
+			glassRec.x += deltaX;
 			glassRec.y += deltaY;
-			glassRec.y += deltaX;
-
-
-			glass.currentRotation += (glass.targetRotation - glass.currentRotation);
-
-		}
 
 
 
+			glass.currentRotation += (glass.targetRotation - glass.currentRotation)  * 8.f * deltaTime;
 
 
-
+			i++;
 	}
 
 }
