@@ -84,16 +84,20 @@ void Container::update(float deltaTime) {
 					float sourceBottom = selected.y + selected.height;
 					float targetTop = glassRec.y;
 
-					float targetCenterX = glassRec.x + glassRec.width / 2;
+					float targetCenterX = glassRec.x + glassRec.width / 2 ;
 					float selCenterX = selected.x + selected.width / 2;
 
 
 					bool pourRight = targetCenterX > selCenterX;
+					float distance = targetCenterX - selCenterX;
+					float direction = (distance > 0 ? 1.f : -1.f)  ;
+					//float moveAmount = 80.f;
+				//	sel.targetOffsetX = std::min(std::abs(distance), moveAmount) * direction;
 
+				///	float horizontalNudge = 0.5f;
+				//	sel.targetOffsetX = distance + horizontalNudge;
 
-
-
-					sel.targetOffsetX = targetCenterX - selCenterX + (sel.bound.width + 10.f);
+					sel.targetOffsetX = distance + direction;
 					sel.targetOffsetY = targetTop - sourceBottom - 10.f;
 
 
