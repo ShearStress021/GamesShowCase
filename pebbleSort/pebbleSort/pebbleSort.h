@@ -11,16 +11,37 @@
 
 // TODO: Reference additional headers your program requires here.
 
+enum class PebbleColor {
+	red, blue , green, yellow, 
+	purple, orange, pink,cyan 
+};
+
+inline Color MapPebbleColor(PebbleColor c) {
+
+	switch (c) {
+
+		case PebbleColor::red:    return{ 255, 60, 60, 255 };
+		case PebbleColor::blue:   return { 60, 120, 255,255 };
+		case PebbleColor::green:  return { 60, 200, 60, 255 };
+		case PebbleColor::yellow: return { 255, 220, 40, 255 };
+		case PebbleColor::purple: return { 180, 60, 255, 255 };
+		case PebbleColor::orange: return { 255, 140, 20, 255 };
+		case PebbleColor::pink:   return { 255, 100, 180, 255 };
+		case PebbleColor::cyan:   return { 40, 220, 255, 255 };
+	}
+	return WHITE;
+
+}
+
 struct Pebble {
-	Vector2 position{};
-	Vector2 direction{};
-	Color color{};
+	PebbleColor color{};
 
 };
 
 struct Glass {
 	//Vector2 points{};
 	Rectangle bound{};
+	std::vector<Pebble> pebbles{ };
 	float radius{ 1.f };
 	float thickness{ 2.f };
 	float targetOffsetX{};
@@ -30,6 +51,8 @@ struct Glass {
 	float currentRotation{};
 	float targetRotation{};
 	bool isPoured{ false };
+	int maxPebbles{ 4 };
+
 
 
 };

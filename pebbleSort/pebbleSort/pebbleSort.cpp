@@ -6,7 +6,6 @@
 #include <vector>
 
 
-
 Container::Container() {
 	for (int i{}; i < 5; i++) {
 		Glass glass{};
@@ -19,7 +18,15 @@ Container::Container() {
 		glasses.push_back(glass);
 	}
 
+	glasses[0].pebbles = {
+		Pebble{PebbleColor::red},
+		Pebble{PebbleColor::blue},
+	};
+
+
 }
+
+
 
 void Container::draw() {
 	for (auto &glass : glasses) {
@@ -38,11 +45,23 @@ void Container::draw() {
 
 		DrawRectangleRoundedLines(rec, 0.3f, 8, Color{ 180,200,240,240 });
 		DrawRectangle(rec.x, rec.y - 2, rec.width - 2, 8, BLACK);
-		rlPopMatrix();
-		//			DrawLineEx(glass.points[0], glass.points[1], glass.thickness, RED);
-		//			DrawLineEx(glass.points[1], glass.points[2], glass.thickness, RED);
-		//			DrawLineEx(glass.points[2], glass.points[3], glass.thickness, RED);
 
+		float pebbleRadius{ 8.f };
+		float gap{ 3.f };
+		float startY = rec.y + rec.height - pebbleRadius - gap;
+
+
+
+		for (size_t j{}; j < glass.pebbles.size(); j++) {
+
+			Vector2 center{
+				rec.x + rec.width / 2,
+				startY - j * (pebbleRadius * 2 + gap)
+			};
+
+			DrawCircleV(center, pebbleRadius, MapPebbleColor(glass.pebbles[j].color));
+		}
+		rlPopMatrix();
 	}
 
 
@@ -90,7 +109,7 @@ void Container::update(float deltaTime) {
 
 					bool pourRight = targetCenterX > selCenterX;
 					float distance = targetCenterX - selCenterX;
-					float direction = (distance > 0 ? 1.f : -1.f)  ;
+					float direction = (distance > 0 ? -70.f : 70.f)  ;
 					//float moveAmount = 80.f;
 				//	sel.targetOffsetX = std::min(std::abs(distance), moveAmount) * direction;
 
@@ -101,7 +120,7 @@ void Container::update(float deltaTime) {
 					sel.targetOffsetY = targetTop - sourceBottom - 10.f;
 
 
-					sel.targetRotation = pourRight ? 70.f : -70.f;
+					sel.targetRotation = pourRight ? 80.f : -80.f;
 
 					sel.isPoured = true;
 					selectedIdx = -1;
