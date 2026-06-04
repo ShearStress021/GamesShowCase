@@ -1,4 +1,4 @@
-# 🎮 Games Show Case
+# Games Show Case
 
 A collection of small-to-medium games written in **C++**, built for learning, experimentation, and fun.  
 This repository uses modern C++ alongside popular game development libraries such as **raylib** and **SDL3**.
@@ -7,19 +7,19 @@ Each game lives in its own directory and can be built and run independently.
 
 ---
 
-## 🧩 Games Included
+## Games Included
 
 | Game | Library | Status | Description |
 |-----|--------|--------|-------------|
-| `armageddonClash` | raylib | 🧪 Prototype | Short description |
-| `don Dominion` | raylib | 🚧 In Progress | Short description |
-| `pebble sort` | raylib | 🧪 Prototype | Short description |
+| `armageddonClash` | raylib |  Prototype | Short description |
+| `don Dominion` | raylib |  In Progress | Short description |
+| `pebble sort` | raylib |  Prototype | Short description |
 
 > This list will grow as more games are added.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Language:** C++ (C++17 / C++20)
 - **Libraries:**
@@ -31,7 +31,7 @@ Each game lives in its own directory and can be built and run independently.
 
 ---
 
-## 🚀 Building & Running
+##  Building & Running
 
 ### Prerequisites
 
