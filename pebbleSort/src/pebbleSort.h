@@ -1,7 +1,4 @@
-﻿// pebbleSort.h : Include file for standard system include files,
-// or project specific include files.
-
-#pragma once
+﻿#pragma once
 
 #include <iostream>
 #include <raylib.h>
@@ -9,7 +6,6 @@
 #include <raymath.h>
 #include <rlgl.h>
 
-// TODO: Reference additional headers your program requires here.
 
 enum class PebbleColor {
 	red, blue , green, yellow, 
@@ -35,6 +31,11 @@ inline Color MapPebbleColor(PebbleColor c) {
 
 struct Pebble {
 	PebbleColor color{};
+	float targetOffsetX{};
+	float currentOffsetX{};
+	Vector2 center{};
+
+
 
 };
 
@@ -54,6 +55,10 @@ struct Glass {
 	int maxPebbles{ 4 };
 
 
+	void draw(float x, float y){
+
+	}
+
 
 };
 
@@ -70,12 +75,3 @@ private:
 	float rotation{};
 	int selectedIdx{ -1 };
 };
-// pebbleSort.h : Include file for standard system include files,
-// or project specific include files.
-
-
-
-
-
-
-// TODO: Reference additional headers your program requires here.
