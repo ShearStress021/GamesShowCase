@@ -2,7 +2,6 @@
 //
 
 #include "pebbleSort.h"
-#include <raylib.h>
 #include <vector>
 
 
@@ -30,12 +29,8 @@ Container::Container() {
 
 void Container::draw() {
 	for (auto &glass : glasses) {
-		//			DrawSplineLinear(glass.points.data(), glass.points.size(), glass.thickness, RED);
-		//			DrawCircleV(glass.points[0], glass.radius, RED);
-		//			DrawCircleV(glass.points[3], glass.radius, RED);
 
 
-				//	DrawRectangleRounded(rec, 0.3f, 8, Color { 180, 200, 240, 60 });
 		auto& rec = glass.bound;
 		rlPushMatrix();
 		Vector2 pivot{ rec.x + rec.width / 2, rec.y + rec.height / 2 };
@@ -53,13 +48,15 @@ void Container::draw() {
 
 
 		for (size_t j{}; j < glass.pebbles.size(); j++) {
-
-			Vector2 center{
+			glass.pebbles[j].center  = {
 				rec.x + rec.width / 2,
 				startY - j * (pebbleRadius * 2 + gap)
-			};
 
-			DrawCircleV(center, pebbleRadius, MapPebbleColor(glass.pebbles[j].color));
+			};
+	
+
+
+			DrawCircleV(glass.pebbles[j].center, pebbleRadius, MapPebbleColor(glass.pebbles[j].color));
 		}
 		rlPopMatrix();
 	}
@@ -110,11 +107,6 @@ void Container::update(float deltaTime) {
 					bool pourRight = targetCenterX > selCenterX;
 					float distance = targetCenterX - selCenterX;
 					float direction = (distance > 0 ? -70.f : 70.f)  ;
-					//float moveAmount = 80.f;
-				//	sel.targetOffsetX = std::min(std::abs(distance), moveAmount) * direction;
-
-				///	float horizontalNudge = 0.5f;
-				//	sel.targetOffsetX = distance + horizontalNudge;
 
 					sel.targetOffsetX = distance + direction;
 					sel.targetOffsetY = targetTop - sourceBottom - 10.f;
@@ -124,6 +116,12 @@ void Container::update(float deltaTime) {
 
 					sel.isPoured = true;
 					selectedIdx = -1;
+
+					for(auto &peb: sel.pebbles){
+						std::cout << " peb move a " << peb.center.x << '\n';
+						peb.center.x += 5.f;
+						std::cout << " peb move b " << peb.center.x << '\n';
+					}
 
 
 
@@ -138,6 +136,8 @@ void Container::update(float deltaTime) {
 			float prevY = glass.currentOffsetY;
 			float prevX = glass.currentOffsetX;
 
+			
+
 			glass.currentOffsetY += (glass.targetOffsetY - glass.currentOffsetY) * 8.f * deltaTime;
 			glass.currentOffsetX += (glass.targetOffsetX - glass.currentOffsetX) * 8.f * deltaTime;
 
@@ -146,9 +146,6 @@ void Container::update(float deltaTime) {
 
 			glassRec.x += deltaX;
 			glassRec.y += deltaY;
-
-
-
 			glass.currentRotation += (glass.targetRotation - glass.currentRotation)  * 8.f * deltaTime;
 
 

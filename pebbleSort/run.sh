@@ -3,11 +3,12 @@ BUILD=build
 
 
 if [ -d "$BUILD" ]; then
-    cd build
+    pushd build
 else
-    mkdir build && cd build && cmake ..
+    mkdir build && pushd build && cmake ..
 fi
     
 
 cmake --build .
-./pebbleSort/pebbleSort
+popd
+./build/pebbleSort
