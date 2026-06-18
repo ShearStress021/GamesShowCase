@@ -34,6 +34,7 @@ struct Pebble {
 	float targetOffsetX{};
 	float currentOffsetX{};
 	Vector2 center{};
+	Vector2 position{};
 
 
 
