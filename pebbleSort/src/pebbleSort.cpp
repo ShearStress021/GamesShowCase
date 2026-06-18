@@ -19,7 +19,20 @@ Container::Container() {
 
 	glasses[0].pebbles = {
 		Pebble{PebbleColor::red},
-		Pebble{PebbleColor::blue},
+		Pebble{PebbleColor::red},
+		Pebble{PebbleColor::red},   
+		Pebble{PebbleColor::red},
+		Pebble{PebbleColor::red},
+		Pebble{PebbleColor::red},
+		Pebble{PebbleColor::red},
+		Pebble{PebbleColor::red},
+		Pebble{PebbleColor::red},
+		Pebble{PebbleColor::red},
+		Pebble{PebbleColor::red},
+		Pebble{PebbleColor::red},
+		Pebble{PebbleColor::red},
+		Pebble{PebbleColor::red},
+		Pebble{PebbleColor::red},
 	};
 
 
@@ -41,22 +54,30 @@ void Container::draw() {
 		DrawRectangleRoundedLines(rec, 0.3f, 8, Color{ 180,200,240,240 });
 		DrawRectangle(rec.x, rec.y - 2, rec.width - 2, 8, BLACK);
 
-		float pebbleRadius{ 8.f };
-		float gap{ 3.f };
+		float pebbleRadius{ 4.f };
+		float gap{ 4.f };
 		float startY = rec.y + rec.height - pebbleRadius - gap;
 
 
+		int rows{3};
+		int cols{5};
+
 
 		for (size_t j{}; j < glass.pebbles.size(); j++) {
-			glass.pebbles[j].center  = {
-				rec.x + rec.width / 2,
-				startY - j * (pebbleRadius * 2 + gap)
+
+			int row = j / cols;
+			int col = j % cols;
+
+			Vector2 direction{
+				
+			};
+
+			glass.pebbles[j].direction= {
+				rec.x + pebbleRadius + (col * 10),
+				startY - ( row * 10 )
 
 			};
-	
-
-
-			DrawCircleV(glass.pebbles[j].center, pebbleRadius, MapPebbleColor(glass.pebbles[j].color));
+			DrawCircle(glass.pebbles[j].direction.x , glass.pebbles[j].direction.y, pebbleRadius, MapPebbleColor(glass.pebbles[j].color));
 		}
 		rlPopMatrix();
 	}
@@ -117,13 +138,13 @@ void Container::update(float deltaTime) {
 					sel.isPoured = true;
 					selectedIdx = -1;
 
-					for(auto &peb: sel.pebbles){
-						std::cout << " peb move a " << peb.center.x << '\n';
-						peb.center.x += 5.f;
-						std::cout << " peb move b " << peb.center.x << '\n';
+					for(auto &selP : sel.pebbles){
+
+						selP.direction.x += 10.f;
+						selP.center.x += 10.f;
+						selP.center.y += 10.f;
+
 					}
-
-
 
 				}
 

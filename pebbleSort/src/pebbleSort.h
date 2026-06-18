@@ -31,12 +31,11 @@ inline Color MapPebbleColor(PebbleColor c) {
 
 struct Pebble {
 	PebbleColor color{};
+	Vector2 direction{};
+	Vector2 velocity{};
 	float targetOffsetX{};
 	float currentOffsetX{};
 	Vector2 center{};
-
-
-
 };
 
 struct Glass {
