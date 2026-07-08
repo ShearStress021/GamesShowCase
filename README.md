@@ -14,7 +14,9 @@ Each game lives in its own directory and can be built and run independently.
 | `armageddonClash` | raylib |  Prototype | Short description |
 | `don Dominion` | raylib |  In Progress | Short description |
 | `pebble sort` | raylib |  Prototype | Short description |
-| `snake game` | raylib |  Prototype | snake console game |
+| `Tetris console` | Windows |  Prototype | Windows console game |
+| `snake game` | Windows |  Prototype | snake console game |
+|
 
 > This list will grow as more games are added.
 
