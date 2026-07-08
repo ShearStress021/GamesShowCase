@@ -1,15 +1,15 @@
 CCC=g++
-LIBS=-lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+#LIBS=-lraylib -lGL -lm -lpthread -ldl -lrt -lX11
 
 
 
 res: main.cpp
-	$(CCC) $< -o main $(LIBS)
+	$(CCC) $< -o $@ 
 
 
 run: clean res
-	./main
+	./res
 
 
 clean:
-	rm -rf main
+	del res*
