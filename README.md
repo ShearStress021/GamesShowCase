@@ -49,7 +49,7 @@ Make sure you have:
 ### Build a Specific Game (CMake)
 
 ```bash
-cd games/game-name
+cd GamesShowCase/game-name
 mkdir build
 cd build
 cmake ..
