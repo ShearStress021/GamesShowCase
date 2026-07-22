@@ -28,6 +28,7 @@ Each game lives in its own directory and can be built and run independently.
 - **Libraries:**
   - [raylib](https://www.raylib.com/)
   - [SDL3](https://libsdl.org/)
+  - [Windows.h](https://learn.microsoft.com/)
 - **Build Systems:**
   - CMake (recommended)
   - Make (for simple projects)
