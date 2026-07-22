@@ -17,8 +17,10 @@ include(FetchContent)
 set(RAYLIB_VERSION 5.5)
 FetchContent_Declare(
     raylib
-    URL https://github.com/raysan5/raylib/archive/refs/tags/${RAYLIB_VERSION}.tar.gz
-    #    FIND_PACKAGE_ARGS ${RAYLIB_VERSION} EXACT
+    GIT_REPOSITORY https://github.com/raysan5/raylib.git
+    GIT_TAG 5.5
+    GIT_SHALLOW TRUE
+
 )
 
 set(BUILD_EXAMPLES OFF CACHE INTERNAL "")
