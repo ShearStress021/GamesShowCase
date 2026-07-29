@@ -16,7 +16,7 @@ Each game lives in its own directory and can be built and run independently.
 | `pebble sort` | raylib |  In Progress | Short description |
 | `Tetris console` | Windows |  In Progress | tetris console game |
 | `Snake Console` | Windows |  In Progress | snake console game |
-|
+
 
 > This list will grow as more games are added.
 
