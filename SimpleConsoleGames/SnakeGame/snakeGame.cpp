@@ -1,10 +1,15 @@
 #include "../consoleEngine/consoleGameEngine.hpp"
 
+
+class SnakeGame : public ConsoleGameEngine {
+
+};
+
 int main(){
 
-	ConsoleGameEngine game{};
-	if(game.CreateConsole(130,30))
-		game.GameInit();
+	SnakeGame game{};
+	game.CreateConsole(130,30);
+    game.GameInit();
 	std::cout << "Hello, World\n";
 	return 0;
 }

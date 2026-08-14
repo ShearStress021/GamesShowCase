@@ -16,22 +16,23 @@ class ConsoleGameEngine {
 			std::string title {"Default"};
 			gameName  = title.data();
 		}
-		bool CreateConsole(std::uint8_t width, std::uint8_t height){
+	public:
+		int CreateConsole(std::uint8_t width, std::uint8_t height){
 			if(handleConsole == INVALID_HANDLE_VALUE){
 				std::cerr << "Couldn't make value\n";
-				return false;
+				return 1;
 			}
 
 			if (!SetConsoleActiveScreenBuffer(handleConsole)){
 				std::cerr << "SetConsoleActiveScreenBuffer failed\n";
 				CloseHandle(handleConsole);
-				return false;
+				return 1;
 
 			}
 			if (!GetConsoleScreenBufferInfo(handleConsole, &screenInfo)) {
 				std::cerr << "GetConsoleScreenBufferInfo failed\n";
 				CloseHandle(handleConsole);
-				return false;
+				return 1;
 			}
 
 			screenWidth = width;
@@ -44,26 +45,21 @@ class ConsoleGameEngine {
 			if(!SetConsoleScreenBufferSize(handleConsole, bufferSize)){
 				std::cerr << "SetConsoleScreenBufferInfo failed\n";
 				CloseHandle(handleConsole);
-				return false;
+				return 1;
 
 			}
 
 			windowRect = {0, 0, (short)(screenWidth -1), (short)(screenHeight- 1)};
 			if(!SetConsoleWindowInfo(handleConsole,TRUE,&windowRect)){
 				std::cerr << "SetConsoleWindowInfo failed\n";
-				return false;
+				return 1;
 			}
 
 			screen = new CHAR_INFO[screenWidth * screenHeight];
 			memset(screen, 0, sizeof(CHAR_INFO) * screenWidth * screenHeight);
 
 
-
-
-
-
-
-			return true;
+			return 0;
 		}
 
 		void GameInit(){
@@ -80,23 +76,19 @@ class ConsoleGameEngine {
 
 	private:
 		void GamePlay(){
+
+			while(running){
+				std::this_thread::sleep_for(std::chrono::milliseconds(200));
+
+
+
+				char s[256];
+				std::snprintf(s,std::size(s),"My Game %s",gameName);
+				SetConsoleTitle(s);
+				WriteConsoleOutput(handleConsole, screen, {(short)screenWidth,(short)screenHeight}, {0,0}, &windowRect);
+
+			}
 			
-			std::this_thread::sleep_for(std::chrono::milliseconds(200));
-
-
-
-			char s[256];
-			//std::snprintf(n[screenWidth + 5], std::size(screen) - (screenWidth - 5), 
-								//	"SNAKEHEAD X: Y: %d %d", snakeHead.x, snakeHead.y);
-			//swprintf_s(s, 256, L"OneLoneCoder.com - Console Game Engine - %s - FPS: %3.2f", m_sAppName.c_str(), 1.0f / fElapsedTime);
-			//swprintf_s(s, 256, L"OneLoneCoder.com - Console Game Engine - %s - FPS: %3.2f", m_sAppName.c_str(), 1.0f / fElapsedTime);
-			std::snprintf(s,std::size(s),"My Game %s",gameName);
-			SetConsoleTitle(s);
-			WriteConsoleOutput(handleConsole, screen, {(short)screenWidth,(short)screenHeight}, {0,0}, &windowRect);
-			//WriteConsoleOutputCharacter(handleConsole,,1,{0,0},&byteWritten);
-
-
-
 		}
 
 		
@@ -112,7 +104,7 @@ class ConsoleGameEngine {
 		char text{'A'};
 		CONSOLE_SCREEN_BUFFER_INFO screenInfo{};
 
-		static std::atomic<bool> activeAtom;
+		static std::atomic<bool> running;
 		
 
 
