@@ -1,244 +1,222 @@
 #include <iostream>
 #include <Windows.h>
+#include <cstdint>
 #include <chrono>
-#include <vector>
 #include <thread>
-#include <string>
-#include <algorithm>
-#include "helper.hpp"
+#include <vector>
+#include <mutex>
+#include <atomic>
 
 
-using namespace std::chrono_literals;
-
-
-struct Snake {
-	int x;
-	int y;
+struct Point {
+	int x{};
+	int y{};
 };
 
-constexpr int screenWidth{150};
-constexpr int screenHeight{38};
+enum class Direction{
+	LEFT, RIGHT, UP, DOWN
+};
 
+class SnakeGame {
+	private:
+		HANDLE handleConsole{};
+		std::uint8_t screenWidth{};
+		std::uint8_t screenHeight{};
+		SMALL_RECT windowRect{};
+		char * screen{};
+		DWORD byteWritten{};
+		std::atomic<bool> gameOver{false};
+		std::mutex mtx{};
+		std::vector<Point> snake{{50,20}, {51,20}};
+		char snakeHead{'<'};
+		Direction direction{Direction::LEFT};
+		Point food{40,23};
+		bool keyRight,keyLeft,keyUp, keyDown, guitGamem, isDead{false};
 
-enum class Direction{LEFT, RIGHT,UP,DOWN};
+		
 
-Direction direction{Direction::LEFT};
-
-
-void setColor(int color, HANDLE &handle){
-	
-	SetConsoleTextAttribute(handle, color);
-
-}
-
-
-void setConsoleSize(int width, int height, HANDLE& handle)
-{
-	SMALL_RECT tempRect{0,0,1,1};
-	SetConsoleWindowInfo(handle, TRUE, &tempRect);
-
-
-	COORD bufferSize{};
-	bufferSize.X = (SHORT)width;
-	bufferSize.Y = (SHORT)height;
-
-	SetConsoleScreenBufferSize(handle, bufferSize);
-
-	SMALL_RECT windowRect{};
-	windowRect.Left = 0;
-	windowRect.Top = 0;
-	windowRect.Right = (SHORT)(width - 1);
-	windowRect.Bottom =(SHORT)(height - 1);
-
-	SetConsoleWindowInfo(handle, TRUE,&windowRect);
-}
-
-int main(){
-
-	ConsoleHandle screenConsole{CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL,
-			CONSOLE_TEXTMODE_BUFFER, NULL)};
-	DWORD byteWritten{};
-	DWORD attributesWritten{};
-
-
-	if(screenConsole.value == INVALID_HANDLE_VALUE){
-		std::cerr << "Could make console\n";
-		return 1;
-	}
-
-	if (!SetConsoleActiveScreenBuffer(screenConsole.value)){
-		std::cerr << "SetConsoleActiveScreenBuffer failed\n";
-		CloseHandle(screenConsole.value);
-		return 1;
-	}
-	CONSOLE_SCREEN_BUFFER_INFO screenInfo{};
-	if (!GetConsoleScreenBufferInfo(screenConsole.value, &screenInfo)) {
-		std::cerr << "GetConsoleScreenBufferInfo failed\n";
-		CloseHandle(screenConsole.value);
-		return 1;
-	}
-
-
-
-	setConsoleSize(screenWidth, screenHeight, screenConsole.value);
-	setColor(FOREGROUND_GREEN, screenConsole.value);
-	
-
-
-
-	bool gameOver{false};
-	bool quitGame{false};
-	bool isDead{false};
-
-	char screen[screenWidth * screenHeight];
-	WORD color[screenWidth * screenHeight];
-
-	std::vector<Snake>  snake {{60, 15}, {61, 15}, {62, 15}};
-
-	bool keyLeft{false};
-	bool keyUp{false};
-	bool keyRight{false};
-	bool keyDown{false};
-
-	char snakesHead{'>'};
-	int snakesDirection{3};
-
-	int foodX{60};
-	int foodY{20};
-	int score{};
-
-
-
-	//auto timeNow = std::chrono::system_clock::now();
-
-
-
-	while(!gameOver){
-
-		// snake Movement
-		auto timeNow = std::chrono::system_clock::now();
-
-		while((std::chrono::system_clock::now()- timeNow) <  std::chrono::milliseconds(120)){
-			keyRight = (GetAsyncKeyState((unsigned char)('\x27')) & 0x8000) != 0;
-			keyLeft = (GetAsyncKeyState((unsigned char)('\x25')) & 0x8000) != 0;
-			keyUp = (GetAsyncKeyState((unsigned char)('\x26')) & 0x8000) != 0;
-			keyDown = (GetAsyncKeyState((unsigned char)('\x28')) & 0x8000) != 0;
-
-
-			if(keyLeft && direction != Direction::RIGHT)
-				direction = Direction::LEFT;
-			else if(keyRight && direction != Direction::LEFT)
-				direction = Direction::RIGHT;
-			else if(keyDown && direction != Direction::UP)
-				direction = Direction::DOWN;
-			else if(keyUp && direction != Direction::DOWN)
-				direction = Direction::UP;
-
-		}
-		Snake snakeHead = snake.front();
-
-		switch(direction){
-			case Direction::UP:
-				snakeHead.y --;
-				break;
-			case Direction::RIGHT:
-				snakeHead.x ++;
-				break;
-			case Direction::DOWN:
-				snakeHead.y++;
-				break;
-			case Direction::LEFT:
-				snakeHead.x--;
-				break;
-
-
-		}
-		snake.insert(snake.begin(), snakeHead);
-
-		switch(direction){
-			case Direction::RIGHT:
-				snakesHead = '>';
-				break;
-			case Direction::LEFT:
-				snakesHead = '<';
-				break;
-			case Direction::UP:
-				snakesHead = '^';
-				break;
-			case Direction::DOWN:
-				snakesHead = 'v';
-				break;
-
+	public:
+		SnakeGame(){
+			screenWidth = 130;
+			screenHeight = 35;
+			handleConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		}
 
-		std::this_thread::sleep_for(150ms);
+		int createWindow(std::uint8_t width, std::uint8_t height){
+			screenWidth = width;
+			screenHeight = height;
 
-		if(snakeHead.x < 0 ||  snakeHead.x >= screenWidth)
-			isDead = true;
-		if(snakeHead.y < 3 || snakeHead.y >= screenHeight)
-			isDead = true;
+			if(handleConsole == INVALID_HANDLE_VALUE){
+				std::cerr << "Could make Console\n";
+				return 1;
+			}
+			if(!SetConsoleActiveScreenBuffer(handleConsole)){
+				std::cerr << "Set ConsoleActiveScreenBuffer failed\n";
+				CloseHandle(handleConsole);
+				return 1;
+			}
 
 
-		if(snakeHead.x == foodX && snakeHead.y == foodY){
-			score++;
+			windowRect = {0,0,1,1};
+			SetConsoleWindowInfo(handleConsole, TRUE, &windowRect);
 
-			while(screen[foodY * screenWidth + foodX] != ' '){
-				foodX = rand() % screenWidth;
-				foodY = (rand() % screenHeight) + 3;
+			COORD bufferSize{};
+			bufferSize = {(short)screenWidth, (short)screenHeight};
+			if(!SetConsoleScreenBufferSize(handleConsole, bufferSize)){
+				std::cerr << "Set Console Screen Buffer Size failed\n";
+				CloseHandle(handleConsole);
+				return 1;
+			}
+
+
+			CONSOLE_SCREEN_BUFFER_INFO screenInfo{};
+			if(!GetConsoleScreenBufferInfo(handleConsole, &screenInfo)){
+				std::cerr << "GetConsoleScreenBufferInfo Failed\n";
+				CloseHandle(handleConsole);
+				return 1;
 
 			}
 
-			snake.push_back({snake.back().x , snake.back().y});
+			windowRect = {0,0, (short)(screenWidth - 1), (short)(screenHeight -1 )};
+
+			if(!SetConsoleWindowInfo(handleConsole, TRUE, &windowRect)){
+				std::cerr << "Set Console Window Info\n";
+				return 1;
+			}
+
+			screen = new char[screenWidth * screenHeight];
+
+			return 0;
+
 		}
 
-		// delete last
-		snake.pop_back();
+		void inputThread(){
+			while(!gameOver){
+				std::lock_guard<std::mutex> lock(mtx);
+
+				if (GetAsyncKeyState((unsigned char)('\x27')) & 0x8000) direction = Direction::RIGHT;
+				else if (GetAsyncKeyState((unsigned char)('\x25')) & 0x8000) direction = Direction::LEFT;
+				else if (GetAsyncKeyState((unsigned char)('\x26')) & 0x8000) direction = Direction::UP;
+				else if (GetAsyncKeyState((unsigned char)('\x28')) & 0x8000) direction = Direction::DOWN;
+				if (GetAsyncKeyState((unsigned char)('\x20')) & 0x8000) gameOver = true;
+
+			}
+
+			std::this_thread::sleep_for(std::chrono::milliseconds(50));
+		}
+
+		void renderer(){
+
+			while(!gameOver){
+				update();
+				// screen clearing  
+				for(int i{}; i < screenWidth * screenHeight; i++) screen[i] = ' ';
+
+				// boarder 
+				for(int i {}; i < screenWidth; i++){
+					screen[i] = '=';
+					screen[2* screenWidth + i] = '=';
+				}
+
+				for(size_t i{1}; i < snake.size(); i++){
+					Point s = snake[i];
+					screen[s.y * screenWidth + s.x] = isDead ? 'Q' : 'o';
+				}
+
+				//
+				screen[snake.front().y * screenWidth + snake.front().x] = isDead ? 'X':  snakeHead;
 
 
-		// screen clearing
-		for(int i{}; i < screenWidth * screenHeight; i++) screen[i] = ' ';
-
-		std::string status = "Snake X: " + std::to_string(snakeHead.x) +  "Y: " + std::to_string(snakeHead.y);
-
-		std::snprintf(&screen[screenWidth + 5], std::size(screen) - (screenWidth - 5), 
-				"SNAKEHEAD X: Y: %d %d", snakeHead.x, snakeHead.y);
+				screen[food.y * screenWidth + food.x] = '@';
 		
-		std::snprintf(&screen[screenWidth + 40], std::size(screen) - (screenWidth - 5), 
-				"SNAKE SCORE: %d ",  score);
-
-	
 
 
-		for(int i = 0; i < screenWidth; i++){
-			screen[i] = '=';
-			screen[2 * screenWidth + i] = '=';
-		}
 
-		// snake body
-		for(size_t i{1}; i < snake.size(); i++){
-			Snake prev = snake[i - 1];
-			Snake s = snake[i];
-			char bodyChar = 'o';
 
-			screen[s.y * screenWidth + s.x] = bodyChar;
-		//	color[s.y * screenWidth + s.x] = FOREGROUND_GREEN;
+				WriteConsoleOutputCharacter(handleConsole, screen, screenWidth * screenHeight, {0,0}, &byteWritten);
+				if(isDead) gameOver = true;
+				std::this_thread::sleep_for(std::chrono::milliseconds(150));
+
+
+			}
 
 		}
 
 
-		screen[snake.front().y * screenWidth + snake.front().x] = isDead ? 'X':  snakesHead;
+		~SnakeGame(){
+			delete[] screen;
+			CloseHandle(handleConsole);
+		}
+	private:
+
+		void update(){
+			Direction dir;
+
+			{
+				std::lock_guard<std::mutex> lock(mtx);
+				dir = direction;
+
+			}
+			Point head = snake.front();
+
+			switch(dir){
+				case Direction::LEFT:
+					head.x--;
+					snakeHead = '<';
+					break;
+				case Direction::RIGHT:
+					head.x++;
+					snakeHead = '>';
+					break;
+				case Direction::UP:
+					head.y--;
+					snakeHead = '^';
+					break;
+				case Direction::DOWN:
+					head.y++;
+					snakeHead = 'v';
+					break;
+			}
 
 
-		screen[foodY * screenWidth + foodX] = '@';
+			snake.insert(snake.begin(), head);
+
+			eatingFood();
+
+			if(head.x < 0 || head.x >= screenWidth) isDead = true;
+			if(head.y < 3 || head.y >= screenHeight) isDead = true;
+			snake.pop_back();
+
+		}
+
+		void eatingFood(){
+			Point head = snake.front();
+
+			if (head.x == food.x && head.y == food.y){
+
+				while(screen[food.y * screenWidth + food.x] != ' '){
+					food.x = rand() % screenWidth;
+					food.y = (rand() % screenHeight) + 3;
+				}
+
+				snake.push_back({snake.back().x, snake.back().y});
+			}
+
+		}
+		
 
 
+};
 
-		WriteConsoleOutputCharacter(screenConsole.value, screen, screenWidth * screenHeight,{0,0},&byteWritten);
-		//WriteConsoleOutputAttribute(screenConsole.value, color, screenWidth * screenHeight,{0,0},&attributesWritten);
-		quitGame = (GetAsyncKeyState((unsigned char)('\x20')) & 0x8000) != 0;
-		if(quitGame || isDead) gameOver = true;
 
-	}
+int main(){
+	SnakeGame game{};
+	game.createWindow(130, 30);
 
+	std::thread gameLoop(&SnakeGame::renderer, &game);
+	std::thread inputThread(&SnakeGame::inputThread, &game);
+
+	gameLoop.join();
+	inputThread.join();
 	return 0;
 }
