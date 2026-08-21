@@ -27,8 +27,8 @@ class ConsoleGameEngine {
 				std::cerr << "SetConsoleActiveScreenBuffer failed\n";
 				CloseHandle(handleConsole);
 				return 1;
-
 			}
+
 			if (!GetConsoleScreenBufferInfo(handleConsole, &screenInfo)) {
 				std::cerr << "GetConsoleScreenBufferInfo failed\n";
 				CloseHandle(handleConsole);
@@ -37,8 +37,8 @@ class ConsoleGameEngine {
 
 			screenWidth = width;
 			screenHeight = height;
+			windowRect = {0, 0, 1, 1};
 
-			windowRect = {0,0,1,1};
 			SetConsoleWindowInfo(handleConsole, TRUE, &windowRect);
 
 			COORD bufferSize{(short) screenWidth, (short)screenHeight};
@@ -46,10 +46,9 @@ class ConsoleGameEngine {
 				std::cerr << "SetConsoleScreenBufferInfo failed\n";
 				CloseHandle(handleConsole);
 				return 1;
-
 			}
 
-			windowRect = {0, 0, (short)(screenWidth -1), (short)(screenHeight- 1)};
+			windowRect = {0, 0, (short)(screenWidth - 1), (short)(screenHeight - 1)};
 			if(!SetConsoleWindowInfo(handleConsole,TRUE,&windowRect)){
 				std::cerr << "SetConsoleWindowInfo failed\n";
 				return 1;
@@ -57,54 +56,72 @@ class ConsoleGameEngine {
 
 			screen = new CHAR_INFO[screenWidth * screenHeight];
 			memset(screen, 0, sizeof(CHAR_INFO) * screenWidth * screenHeight);
-
-
 			return 0;
+
 		}
 
-		void GameInit(){
+		virtual bool CustomGame() = 0;
+
+		void GameInit()
+		{
 			GamePlay();
+
 		}
 
 
-		~ConsoleGameEngine(){
+		~ConsoleGameEngine()
+		{
 			CloseHandle(handleConsole);
-			delete screen;
-			
+			delete[] screen;
 		}
 
 
 	private:
-		void GamePlay(){
+		void GamePlay()
+		{
 
-			while(running){
+			while(!running)
+			{
 				std::this_thread::sleep_for(std::chrono::milliseconds(200));
+
+
+
+
+
+				if(!CustomGame())
+					running = true;
 
 
 
 				char s[256];
 				std::snprintf(s,std::size(s),"My Game %s",gameName);
 				SetConsoleTitle(s);
-				WriteConsoleOutput(handleConsole, screen, {(short)screenWidth,(short)screenHeight}, {0,0}, &windowRect);
+				WriteConsoleOutput(handleConsole, screen, 
+						{(short)screenWidth,(short)screenHeight}, {0,0}, &windowRect);
+
+				if (GetAsyncKeyState((unsigned char)('\x20')) & 0x8000) running= true;
+
 
 			}
 			
 		}
 
 		
-
-	private:
+	protected:
+		CHAR_INFO *screen;
 		std::uint8_t screenWidth{};
 		std::uint8_t screenHeight{};
+
+
+	private:
 		HANDLE handleConsole{};
-		CHAR_INFO *screen;
 		char*  gameName;
 		SMALL_RECT windowRect{};
 		DWORD byteWritten{};
 		char text{'A'};
 		CONSOLE_SCREEN_BUFFER_INFO screenInfo{};
-
-		static std::atomic<bool> running;
+		bool running{false};
+		//static std::atomic<bool> running;
 		
 
 
