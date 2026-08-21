@@ -23,7 +23,7 @@ class SnakeGame {
 		std::uint8_t screenWidth{};
 		std::uint8_t screenHeight{};
 		SMALL_RECT windowRect{};
-		char * screen{};
+		CHAR_INFO* screen{};
 		DWORD byteWritten{};
 		std::atomic<bool> gameOver{false};
 		std::mutex mtx{};
@@ -84,7 +84,8 @@ class SnakeGame {
 				return 1;
 			}
 
-			screen = new char[screenWidth * screenHeight];
+			screen = new CHAR_INFO[screenWidth * screenHeight];
+			memset(screen, 0, sizeof(CHAR_INFO) * screenWidth * screenHeight);
 
 			return 0;
 
@@ -110,30 +111,36 @@ class SnakeGame {
 			while(!gameOver){
 				update();
 				// screen clearing  
-				for(int i{}; i < screenWidth * screenHeight; i++) screen[i] = ' ';
+				for(int i{}; i < screenWidth * screenHeight; i++) {
+					screen[i].Char.UnicodeChar= ' ';
+					screen[i].Attributes = FOREGROUND_GREEN;
+				}
+					
 
 				// boarder 
 				for(int i {}; i < screenWidth; i++){
-					screen[i] = '=';
-					screen[2* screenWidth + i] = '=';
+					screen[i].Char.UnicodeChar = '=';
+					screen[2* screenWidth + i].Char.UnicodeChar= '=';
 				}
 
 				for(size_t i{1}; i < snake.size(); i++){
 					Point s = snake[i];
-					screen[s.y * screenWidth + s.x] = isDead ? 'Q' : 'o';
+					screen[s.y * screenWidth + s.x].Char.UnicodeChar = isDead ? 'Q' : 'o';
 				}
 
 				//
-				screen[snake.front().y * screenWidth + snake.front().x] = isDead ? 'X':  snakeHead;
+				screen[snake.front().y * screenWidth + snake.front().x].Char.UnicodeChar = isDead ? 'X':  snakeHead;
 
 
-				screen[food.y * screenWidth + food.x] = '@';
+				screen[food.y * screenWidth + food.x].Char.UnicodeChar = '@';
 		
 
 
 
 
-				WriteConsoleOutputCharacter(handleConsole, screen, screenWidth * screenHeight, {0,0}, &byteWritten);
+
+				WriteConsoleOutput(handleConsole, screen, 
+						{(short)screenWidth , (short)screenHeight}, {0,0}, &windowRect);
 				if(isDead) gameOver = true;
 				std::this_thread::sleep_for(std::chrono::milliseconds(150));
 
@@ -144,6 +151,7 @@ class SnakeGame {
 
 
 		~SnakeGame(){
+			gameOver = true;
 			delete[] screen;
 			CloseHandle(handleConsole);
 		}
@@ -194,7 +202,7 @@ class SnakeGame {
 
 			if (head.x == food.x && head.y == food.y){
 
-				while(screen[food.y * screenWidth + food.x] != ' '){
+				while(screen[food.y * screenWidth + food.x].Char.AsciiChar != ' '){
 					food.x = rand() % screenWidth;
 					food.y = (rand() % screenHeight) + 3;
 				}
