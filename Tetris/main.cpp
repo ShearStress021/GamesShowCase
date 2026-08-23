@@ -110,10 +110,6 @@ class TetrisGame {
 
 				}
 
-
-
-
-
 				WriteConsoleOutputCharacter(screenConsole,screen,screenWidth * screenHeight, {0,0}, &byteWritten);
 				if (GetAsyncKeyState((unsigned char)('\x20')) & 0x8000) running = true;
 
@@ -125,11 +121,6 @@ class TetrisGame {
 		~TetrisGame(){
 			CloseHandle(screenConsole);
 		}
-
-
-
-
-
 
 };
 
