@@ -14,9 +14,9 @@ Each game lives in its own directory and can be built and run independently.
 | `armageddonClash` | raylib |  In Progress | Short description |
 | `don Dominion` | raylib |  In Progress | Short description |
 | `pebble sort` | raylib |  In Progress | Short description |
-| `Tetris console` | Windows |  In Progress | tetris console game |
-| `Snake Console` | Windows |  In Progress | snake console game |
-| `Windows Console Games` | Windows |  In Progress | console game |
+| `Tetris console` | Win32 API |  In Progress | tetris console game |
+| `Snake Console` | Win32 API |  In Progress | snake console game |
+| `Swimmers `     | SDL3 + VULKAN |  In Progress |  Swimmers |
 
 
 
