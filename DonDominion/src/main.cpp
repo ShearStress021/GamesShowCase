@@ -1,36 +1,40 @@
-#include "startScene.hpp"
-
-#include "raylib.h"
-
+#include <raylib.h>
+#include "scenes.hpp"
 
 
 constexpr int minWindowWidth  = 920;
 constexpr int minWindowHeight = 720;
 
-
-int main() {
+int main(){
 	InitWindow(minWindowWidth, minWindowHeight, "Don minion");
 	SetExitKey(KEY_NULL);
 	SetTargetFPS(60);
 
-
-	std::shared_ptr<dominion::Scene> currentScene =  std::make_shared<dominion::StartScene>();
+	dominion::TextureHandler tex{};
+	dominion::Scene scene{};
+	dominion::switchScenes(scene, dominion::SceneId::Load, tex);
 
 	while(!WindowShouldClose()) {
 
-		if(currentScene->quitScene) {
-			auto newScene = currentScene->change();
-			currentScene = newScene;
-		}
+		const auto next  = dominion::updateScene(scene, GetFrameTime());
 
-		currentScene->updateStateLogic();
+
 
 		BeginDrawing();
-		 	ClearBackground(WHITE);
-			currentScene->render();
+		ClearBackground(BLACK);
+			renderScene(scene);
+
 		EndDrawing();
+
+		if(next){
+			if (*next == dominion::SceneId::Quit) break;
+			dominion::switchScenes(scene, *next, tex);
+			
+		}
 
 	}
 	CloseWindow();
-}
 
+
+
+}
