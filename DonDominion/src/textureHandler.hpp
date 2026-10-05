@@ -38,8 +38,12 @@ namespace dominion {
 			void loadTexures() {
 				std::filesystem::create_directories("data/sprites");
 				for(const auto& file: std::filesystem::recursive_directory_iterator("data/sprites")){
-					if(file.is_regular_file()){
-						loadTexture(file.path().stem().string(),file.path().string());
+					const double budgetTime{0.0008};
+					const double startTime{GetTime()};
+					while((GetTime() - startTime) < budgetTime){
+						if(file.is_regular_file()){
+							loadTexture(file.path().stem().string(),file.path().string());
+						}
 					}
 				}
 

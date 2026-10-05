@@ -12,16 +12,20 @@ namespace dominion {
 
 	void StartScene::render() const {
 		const auto& load = tex.getTexture("loading");
+		const float w = load.width, h = load.height;
+		const float sx = GetScreenWidth() / 2.f, sy = GetScreenHeight() / 2.f;
+		const float barW{300.f};
 
-		DrawTexturePro(load, {0.f, 0.f, (float)load.width, (float)load.height}, {GetScreenWidth() / 2.f, GetScreenHeight() / 2.f,
-				  					  load.width * 2.f, load.height * 2.f}, {(float)load.width, (float)load.height}, rotation, WHITE);
+
+		DrawTexturePro(load, {0.f, 0.f, w, h}, {sx , sy ,w * 2.f,  h * 2.f}, {w, h}, rotation, BLUE);
+		DrawRectangleLines(int(sx - barW/2), int(sy + h * 2), int(barW), 10,GRAY);
 		
 
 	}
 
 	Next StartScene::update(float dt){
 		change(dt);
-		if(fadeOut) return SceneId::Quit;
+		if(fadeOut) return SceneId::Game;
 		return {};
 
 	}

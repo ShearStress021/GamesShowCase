@@ -1,16 +1,18 @@
 #pragma once
 
 #include "startScene.hpp"
+#include "gameScene.hpp"
 #include <variant>
 
 
 namespace dominion {
 
-	using Scene = std::variant<std::monostate,StartScene>;
+	using Scene = std::variant<std::monostate,StartScene, GameScene>;
 
 	inline void switchScenes(Scene &scene, SceneId id,TextureHandler& tex){
 		switch(id){
 			case SceneId::Load: scene.emplace<StartScene>(tex); break;
+			case SceneId::Game: scene.emplace<GameScene>(tex); break;
 			case SceneId::Quit: break;
 
 		}
