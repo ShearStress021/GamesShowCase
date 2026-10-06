@@ -4,7 +4,7 @@
 
 
 namespace dominion {
-	enum class SceneId{Load,Quit};
+	enum class SceneId{Load,Game,Quit};
 	using Next = std::optional<SceneId>;
 }
 

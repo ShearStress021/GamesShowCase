@@ -1,0 +1,24 @@
+#include "hero.hpp"
+
+
+namespace dominion {
+
+	Player::Player(const Texture2D& texture) : tex(texture){
+		maxFrame = 7;
+		width = tex.width * 1.f / maxFrame;
+		height = tex.height;
+		frameRect = {0,0,width,height};
+
+
+	}
+
+	void Player::render() const{
+		const float w = tex.width, h = tex.height;
+		DrawTexturePro(tex,frameRect,{200,200,w * 1.f,h * 1.f},{},{},WHITE);
+	}
+
+
+}
+
+
+
