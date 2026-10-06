@@ -11,6 +11,7 @@ namespace dominion {
 	}
 
 	void GameScene::render() const {
+		player.render();
 		DrawRectangle(200, 300,100,200,YELLOW);
 	}
 

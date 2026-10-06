@@ -9,9 +9,8 @@ namespace dominion {
 
 	void Player::render() const{
 		const float w = tex.width, h = tex.height;
-		DrawTexturePro(tex,{0,0,w,h},{200,200,w,h},{},{},WHITE);
+		DrawTexturePro(tex,{0,0,w,h},{200,200,w * 2.f,h * 2.f},{},{},WHITE);
 	}
-
 
 
 }
