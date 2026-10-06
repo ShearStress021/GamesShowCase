@@ -34,7 +34,7 @@ namespace dominion {
 
 		rotation += dt * 360;
 		timer += dt;
-		fadeOut = (timer > 5.f);
+		fadeOut = (timer > 2.f);
 		tex.loadTexures();
 	}
 
