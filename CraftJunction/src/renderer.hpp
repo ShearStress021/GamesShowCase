@@ -27,6 +27,7 @@ class Renderer {
 		bool createDevice(VkPhysicalDevice physicalDevice);
 
 
+
 	
 	private:
 		GLFWwindow *window{nullptr};
@@ -45,6 +46,7 @@ class Renderer {
 
 		//queue family
 		uint32_t gfxQueueFamIdx{UINT32_MAX};
+		VkQueue gfxQueue{VK_NULL_HANDLE};
 
 
 

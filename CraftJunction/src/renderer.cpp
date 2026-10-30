@@ -40,6 +40,8 @@ bool Renderer::initVulkan(){
 	}
 	if(!findGraphicQueue()) throw std::runtime_error("couldn't find graphics queue!!!!");
 
+	if(!createDevice(physicalDevice)) throw std::runtime_error("device couldn't be created");
+
 	
 	return true;
 }
@@ -172,6 +174,80 @@ bool Renderer::findGraphicQueue(){
 }
 
 bool Renderer::createDevice(VkPhysicalDevice physicalDevice){
+	float queuePriority{1.f};
+	std::vector<uint32_t> queueFamily{gfxQueueFamIdx};
+
+	VkDeviceQueueCreateInfo deviceQueueInfo {
+		.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO,
+			.queueFamilyIndex = gfxQueueFamIdx,
+			.queueCount = 1,
+			.pQueuePriorities = &queuePriority
+	};
+
+	VkPhysicalDeviceVulkan14Features supportedFeatures14{ .sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_FEATURES, .pNext = nullptr   };
+	VkPhysicalDeviceVulkan13Features supportedFeatures13{ .sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_3_FEATURES, .pNext = &supportedFeatures14   };
+	VkPhysicalDeviceVulkan12Features supportedFeatures12{ .sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES, .pNext = &supportedFeatures13   };
+	VkPhysicalDeviceFeatures2 supportedFeatures{ .sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2, .pNext = &supportedFeatures12   };
+	vkGetPhysicalDeviceFeatures2(physicalDevice, &supportedFeatures);
+
+	// check if what we need is supported
+	if (!supportedFeatures13.dynamicRendering || !supportedFeatures13.synchronization2 ||
+			!supportedFeatures12.timelineSemaphore)
+	{
+		throw std::runtime_error("Physical device doesn't meet the feature requirements");
+		return false;
+	}
+	VkPhysicalDeviceVulkan14Features features14
+	{
+		.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_FEATURES,
+			.pNext = nullptr,
+
+	};
+	VkPhysicalDeviceVulkan13Features features13
+	{
+		.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_3_FEATURES,
+			.pNext = &features14,
+			.synchronization2 = VK_TRUE,
+			.dynamicRendering = VK_TRUE,
+
+	};
+	VkPhysicalDeviceVulkan12Features features12
+	{
+		.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES,
+			.pNext = &features13,
+			.timelineSemaphore = VK_TRUE
+
+	};
+	VkPhysicalDeviceFeatures2 features{ .sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2, .pNext = &features12   };
+	const std::vector<const char *> deviceExtensions{ VK_KHR_SWAPCHAIN_EXTENSION_NAME   };
+	VkDeviceCreateInfo devCreateInfo
+	{
+		.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,
+			.pNext = &features,
+			.queueCreateInfoCount = 1,
+			.pQueueCreateInfos = &deviceQueueInfo,
+			.enabledExtensionCount = static_cast<uint32_t>(deviceExtensions.size()),
+			.ppEnabledExtensionNames = deviceExtensions.data(),
+			.pEnabledFeatures = nullptr // features struct chain is set in pNext
+
+	};
+
+	if (vkCreateDevice(physicalDevice, &devCreateInfo, nullptr, &device) != VK_SUCCESS)
+	{
+		throw std::runtime_error("Couldn't create the logical GPU device");
+		return false;
+
+	}
+
+	vkGetDeviceQueue(device, gfxQueueFamIdx, 0, &gfxQueue);
+	if (!gfxQueue)
+	{
+		throw std::runtime_error("Couldn't get the graphics queue");
+
+	}
+
+
+
 
 	return true;
 }
